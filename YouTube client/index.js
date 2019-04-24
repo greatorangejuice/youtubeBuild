@@ -2,13 +2,19 @@ const player = document.getElementById("#player");
 const APIKEY = "AIzaSyADcQR-taqJA3LHlG0ta4beH0-U5vswwUg";
 const URL = "https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=3&q=";
 const launchSearchButton = document.getElementById('startSearch');
-const firstBlock = document.querySelector("#first")
+const firstBlock = document.querySelector("#first-block")
 let testP = document.querySelector("#test")
 
+let firstTitle = document.querySelector("#first-title");
+let firstImage = document.querySelector("#preview-firstImage")
+let firstDescription = document.querySelector("#description");
 
 const dataOutput = (obj) => {
     console.log(obj);
-    console.log(obj.items);
+    console.log(obj.items[0].snippet.title);
+    firstImage.src = obj.items[0].snippet.thumbnails.high.url;
+    firstTitle.textContent = obj.items[0].snippet.title;
+    firstDescription.textContent = obj.items[0].snippet.description;
 }
 
 
