@@ -8,24 +8,36 @@ let testP = document.querySelector("#test")
 let firstTitle = document.querySelector("#first-title");
 let firstImage = document.querySelector("#preview-firstImage")
 let firstDescription = document.querySelector("#description");
+let publishTime = document.querySelector("#publish-time");
+
+
+
 
 const dataOutput = (obj) => {
     console.log(obj);
     console.log(obj.items[0].snippet.title);
-    firstImage.src = obj.items[0].snippet.thumbnails.high.url;
+    firstImage.src = obj.items[0].snippet.thumbnails.medium.url;
     firstTitle.textContent = obj.items[0].snippet.title;
     firstDescription.textContent = obj.items[0].snippet.description;
+    publishTime.textContent = new Date(obj.items[0].snippet.publishedAt);
+
+    let video = {
+        preview: "",
+        title: "",
+        description: "",
+        date: "",
+    }
+
+    video.preview = obj.items[0].snippet.thumbnails.medium.url;
 }
 
-
 let searchFieldvalue = "JS";
-const newFunc = () => {
+const getData = () => {
     return new Promise(
         (resolve, reject) => {
 
-            console.log(searchFieldvalue);
             let xhr = new XMLHttpRequest();
-            xhr.open('GET', `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=3&q=${searchFieldvalue}&key=${APIKEY}`, true);
+            xhr.open('GET', `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=10&q=${searchFieldvalue}&key=${APIKEY}`, true);
             xhr.onload = function () {
                 if (this.status == 200) {
                     resolve(this.response);
@@ -47,10 +59,9 @@ const newFunc = () => {
 
 launchSearchButton.addEventListener("click", function startSearch() {
     searchFieldvalue = document.getElementById("searchField").value;
-    console.log(searchFieldvalue);
-    newFunc()
+    getData()
         .then(
-            response => dataOutput( JSON.parse(response) ),
+            response => dataOutput(JSON.parse(response)),
             error => console.log(`Rejected: ${error}`),
         )
 });

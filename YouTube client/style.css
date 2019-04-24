@@ -8,7 +8,7 @@
     justify-content: center;
 }
 
-header{
+header {
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -18,4 +18,14 @@ section {
     display: flex;
     justify-content: center;
     padding: 20px 0;
+}
+
+.description {
+    width: 200px;
+    height: 100px;
+}
+
+#preview-image {
+    width: 320px;
+    height: 180px;
 }
