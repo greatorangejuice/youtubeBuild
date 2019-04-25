@@ -33,9 +33,9 @@ section {
 
 
 #notification {
-    position: relative;
-    height: 40%;
-    width: 35%;
+    position: absolute;
+    height: 100px;
+    width: 200px;
     padding: 5px;
     background-color: #C1F7EE;
     top: 10px;
