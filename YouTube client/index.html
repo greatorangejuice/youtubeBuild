@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="./assets/styles/style.css">
+    <link rel="stylesheet" href="style.css">
     <title>YouTube App</title>
 </head>
 <body>
@@ -15,7 +15,7 @@
         </div>
         <section class="search">
             <input type="input" id="searchField" value="">
-            <button id="startSearch" >Search</button>
+            <button id="startSearch">Search</button>
         </section>
     </header>
 
@@ -32,10 +32,33 @@
               </div>
         </section>
         
+        <div class="hide" id="notification" title="notification">
+
+            <h3>Hello!</h3>
+            <p>Do you want to see notification here?</p>
+            <div class="slider">
+                <ul class="tips">
+                    <li><p>Lorem ipsum dolor sit amet consectetur adipisicing elit.Lorem ipsum dolor sit amet consectetur adipisicing elit.</p></li>
+                    <li><p>Lorem ipsum dolor sit amet consectetur adipisicing elit.Lorem ipsum dolor sit amet consectetur adipisicing elit.</p></li>
+                    <li><p>Lorem ipsum dolor sit amet consectetur adipisicing elit.Lorem ipsum dolor sit amet consectetur adipisicing elit.</p></li>
+                </ul>
+            </div>
+            <button class="remove-button" id="remove-button">X</button>
+            <div class="wrapper">
+                <input id="disable-checkbox" class="disableBox" type="checkbox" title="Disable notification"> 
+                <p>Disable notification</p>
+
+        </div>
+
     </main>
+
+
+
+</div>
 
     <footer class="footer"></footer>
 
-    <script async src="./index.js"></script>
+    <script async type="module" src="./index.js"></script>
+    <script type="module" src="./notification.js"></script>
 </body>
 </html>

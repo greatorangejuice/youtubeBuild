@@ -1,17 +1,16 @@
+import { getNotification } from "./notification.js"
+
 const player = document.getElementById("#player");
 const APIKEY = "AIzaSyADcQR-taqJA3LHlG0ta4beH0-U5vswwUg";
 const URL = "https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=3&q=";
 const launchSearchButton = document.getElementById('startSearch');
-const firstBlock = document.querySelector("#first-block")
-let testP = document.querySelector("#test")
 
 let firstTitle = document.querySelector("#first-title");
 let firstImage = document.querySelector("#preview-firstImage")
 let firstDescription = document.querySelector("#description");
 let publishTime = document.querySelector("#publish-time");
 
-
-
+getNotification();
 
 const dataOutput = (obj) => {
     console.log(obj);
@@ -65,3 +64,9 @@ launchSearchButton.addEventListener("click", function startSearch() {
             error => console.log(`Rejected: ${error}`),
         )
 });
+
+
+
+
+
+
