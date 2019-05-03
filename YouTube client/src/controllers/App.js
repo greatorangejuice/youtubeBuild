@@ -1,5 +1,6 @@
-import AppModel from '../models/AppModel';
 import AppView from '../views/AppView';
+import GetData from '../models/GetData';
+
 
 export default class App {
   constructor() {
@@ -10,7 +11,7 @@ export default class App {
   }
 
   async start() {
-    const model = new AppModel(this.state);
+    const model = new GetData(this.state);
     const data = await model.getClipNames();
     const view = new AppView(data);
 

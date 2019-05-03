@@ -1,4 +1,4 @@
-export default class AppModel {
+export default class GetData {
   constructor(state) {
     this.state = state;
   }
@@ -13,6 +13,6 @@ export default class AppModel {
     const responce = await fetch(url);
     const data = await responce.json();
 
-    return AppModel.extractClipNames(data);
+    return GetData.extractClipNames(data);
   }
 }
