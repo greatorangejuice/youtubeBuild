@@ -18,7 +18,16 @@ export default class App {
     const view = new AppView(data);
 
     InitialView.getInitialDom();
+    const startButton = document.querySelector('.search-button');
+    const searchInputValue = document.querySelector('.search-field');
+    // eslint-disable-next-line no-console
+    console.log(searchInputValue);
+    // eslint-disable-next-line no-console
+    console.log(startButton);
+    startButton.addEventListener('click', () => {
+    // eslint-disable-next-line no-console
+      console.log('Its will be work');
+    });
     view.render();
   }
 }
-// Как привязать на кнопку функцию?
