@@ -21,3 +21,4 @@ export default class App {
     view.render();
   }
 }
+// Как привязать на кнопку функцию?
