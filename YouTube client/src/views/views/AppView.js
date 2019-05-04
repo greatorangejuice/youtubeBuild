@@ -9,3 +9,4 @@ export default class AppView {
 
     document.body.appendChild(content);
   }
+}
