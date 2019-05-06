@@ -11,6 +11,16 @@ export default class GetData {
     return data.items.map(clip => clip.snippet.title);
   }
 
+  async getAllData() {
+    const { url } = this.state;
+
+    const response = await fetch(url);
+    const data = await response.json();
+
+    // eslint-disable-next-line no-console
+    console.log(data);
+  }
+
   async getClipNames() {
     const { url } = this.state;
 
