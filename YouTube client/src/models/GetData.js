@@ -7,26 +7,24 @@ export default class GetData {
   // Точнее, мы прокидываем сюда весь объект state, в котором есть заветный url.
   // Здесь же я запилю метод, который будет тянуть данные из первой data,
   // чтобы запустить второй запрос для лайков и прочего.
-  static extractClipNames(data) {
-    return data.items.map(clip => clip.snippet.title);
-  }
+  // static extractData(data) { // почему я не могу юзать async?
+  //   console.log('ExtractData working here');
+  //   const snippets = data.items.map(snippet => snippet);
+  //   console.log('Snippets: ', snippets);
+  // }
 
   async getAllData() {
-    const { url } = this.state;
+    const { APIKEY } = this.state;
+    const inputField = document.querySelector('.search-field').value;
+    const url = `https://www.googleapis.com/youtube/v3/search?key=${APIKEY}&type=video&part=snippet&maxResults=15&q=${inputField}`;
 
     const response = await fetch(url);
     const data = await response.json();
+    const snippets = data.items.map(snippet => snippet);
 
-    // eslint-disable-next-line no-console
     console.log(data);
-  }
-
-  async getClipNames() {
-    const { url } = this.state;
-
-    const response = await fetch(url);
-    const data = await response.json();
-
-    return GetData.extractClipNames(data);
+    console.log(snippets);
+    return snippets;
+    // return GetData.extractData(data);
   }
 }
