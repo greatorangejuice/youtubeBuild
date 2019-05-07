@@ -1,4 +1,4 @@
-// import AppView from '../views/views/AppView';
+import AppView from '../views/views/AppView';
 // import GetData from '../models/GetData';
 import InitialView from '../views/views/InitialView';
 import GetData from '../models/GetData';
@@ -15,18 +15,17 @@ export default class App {
     InitialView.getInitialDom();
     const model = new GetData(this.state);
     const startButton = document.querySelector('.search-button');
-    const test = startButton.addEventListener('click', () => {
-      model.getAllData(); // await?
+    const view = new AppView();
+    startButton.addEventListener('click', async () => {
+    view.render(await model.getAllData());
     });
-    console.log('test here: ', test);
+
     // const view = new AppView(test);
     // Обязательно VIEW юзать в App.js? Или можно отправить его запуск в model?
     // const model = new GetData(this.state);
     // const data = await model.getClipNames();
-    // const view = new AppView(data);
     // eslint-disable-next-line no-console
     // const searchInputValue = document.querySelector('.search-field');
 
-    // view.render();
   }
 }
