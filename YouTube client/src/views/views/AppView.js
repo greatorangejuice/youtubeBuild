@@ -8,6 +8,9 @@ export default class AppView {
 
   render(array) {
     console.log(this.snippets);
+    const wrapper = document.createElement('div');
+    wrapper.className = 'main-wrapper';
+    document.body.appendChild(wrapper);
     array.forEach((data) => {
       const { title, channelTitle, description } = data.snippet;
       const { publishedAt } = data.snippet;
@@ -15,7 +18,7 @@ export default class AppView {
       const dataBlock = document.createElement('div');
 
       dataBlock.className = 'youtube-info-wrapper';
-      document.body.appendChild(dataBlock);
+      wrapper.appendChild(dataBlock);
 
       const titleField = document.createElement('p');
       const channelName = document.createElement('p');

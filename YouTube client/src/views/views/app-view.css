@@ -1,3 +1,7 @@
+.main-wrapper {
+  display: flex;
+}
+
 .youtube-info-wrapper {
   display: flex;
   flex-direction: column;

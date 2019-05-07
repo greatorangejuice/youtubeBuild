@@ -1,3 +1,7 @@
+.search-field-wrapper {
+  display: flex;
+}
+
 .search-button {
   padding: 5px;
 }
