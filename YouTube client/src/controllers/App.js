@@ -17,7 +17,7 @@ export default class App {
     const startButton = document.querySelector('.search-button');
     const view = new AppView();
     startButton.addEventListener('click', async () => {
-    view.render(await model.getAllData());
+      view.render(await model.getAllData());
     });
 
     // const view = new AppView(test);
@@ -26,6 +26,5 @@ export default class App {
     // const data = await model.getClipNames();
     // eslint-disable-next-line no-console
     // const searchInputValue = document.querySelector('.search-field');
-
   }
 }

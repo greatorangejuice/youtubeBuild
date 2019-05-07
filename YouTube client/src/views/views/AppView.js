@@ -11,9 +11,9 @@ export default class AppView {
   }
 
   func() {
-    this.snippets.forEach(data => { // Приходит массив объектов. Проходим, деструктурируем.
+    this.snippets.forEach((data) => { // Приходит массив объектов. Проходим, деструктурируем.
       // записываем в DOM.
-      let {title, decription, publishedAt} = data.snippet;
+      const { title, decription, publishedAt } = data.snippet;
       const titleField = document.createElement('p');
       titleField.innerHTML = title;
       // И так со всеми элементами.
