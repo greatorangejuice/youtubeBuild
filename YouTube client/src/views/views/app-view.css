@@ -1,0 +1,9 @@
+.youtube-info-wrapper {
+  display: flex;
+  flex-direction: column;
+  padding: 30px;
+  width: 150px;
+  max-height: 80vh;
+  background-color: #c48d1875;
+  border: 1px solid black;
+}

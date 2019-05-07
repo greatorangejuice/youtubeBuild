@@ -1,21 +1,38 @@
+import './app-view.css';
+
 export default class AppView {
   constructor(snippets) {
     this.snippets = snippets;
+    console.log(snippets);
   }
 
+  render(array) {
+    console.log(this.snippets);
+    array.forEach((data) => {
+      const { title, channelTitle, description } = data.snippet;
+      const { publishedAt } = data.snippet;
+      const { url } = data.snippet.thumbnails.medium;
+      const dataBlock = document.createElement('div');
 
-  render() {
-    const content = document.createElement('ul');
-    content.innerHTML = this.titles.map(title => `<li>${title}</li>`).join('');
-    document.body.appendChild(content);
-  }
+      dataBlock.className = 'youtube-info-wrapper';
+      document.body.appendChild(dataBlock);
 
-  func() {
-    this.snippets.forEach((data) => { // Приходит массив объектов. Проходим, деструктурируем.
-      // записываем в DOM.
-      const { title, decription, publishedAt } = data.snippet;
       const titleField = document.createElement('p');
-      titleField.innerHTML = title;
+      const channelName = document.createElement('p');
+      const descriptionField = document.createElement('p');
+      const publishTime = document.createElement('p');
+      const previewImage = document.createElement('img');
+
+      previewImage.src = url;
+      titleField.innerText = title;
+      channelName.innerText = channelTitle;
+      descriptionField.innerText = description;
+      publishTime.innerText = new Date(publishedAt);
+      dataBlock.appendChild(previewImage);
+      dataBlock.appendChild(titleField);
+      dataBlock.appendChild(channelName);
+      dataBlock.appendChild(descriptionField);
+      dataBlock.appendChild(publishTime);
       // И так со всеми элементами.
     });
   }
