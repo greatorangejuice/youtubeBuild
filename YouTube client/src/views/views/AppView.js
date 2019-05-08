@@ -18,7 +18,7 @@ export default class AppView {
 
   render(array) {
     console.log(this.snippets);
-    const wrapper = document.querySelector('.videoData-container');
+    const wrapper = document.querySelector('.gallery');
     array.forEach((data) => {
       const { title, channelTitle, description } = data.snippet;
       const { publishedAt } = data.snippet;
