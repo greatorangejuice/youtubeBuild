@@ -1,5 +1,6 @@
 .search-field-wrapper {
   display: flex;
+  position: relative;
 }
 
 .search-button {

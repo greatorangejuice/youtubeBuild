@@ -20,11 +20,9 @@ export default class App {
       view.render(await model.getAllData());
     });
 
-    // const view = new AppView(test);
-    // Обязательно VIEW юзать в App.js? Или можно отправить его запуск в model?
-    // const model = new GetData(this.state);
-    // const data = await model.getClipNames();
-    // eslint-disable-next-line no-console
-    // const searchInputValue = document.querySelector('.search-field');
+    // Как избавиться во View от конструктора?
+    // Как удалить отрисованный DOM?
+    // По идее нужно перенести создание враппера в InitialView, чтобы он
+    // растягивался в ширину, а не вниз.
   }
 }

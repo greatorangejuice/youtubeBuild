@@ -1,25 +1,35 @@
 import './app-view.css';
 
 export default class AppView {
-  constructor(snippets) {
-    this.snippets = snippets;
-    console.log(snippets);
+  // constructor(snippets) {
+  //   this.snippets = snippets;
+  //   console.log(snippets);
+  // }
+  // static convertToHumanDate(date) {
+
+  // }
+
+  deletePreviousData() {
+    console.log(this.snippets);
+    const wrapper = document.querySelector('videoData-container');
+    document.body.removeChild(wrapper);
   }
 
   render(array) {
     console.log(this.snippets);
-    const wrapper = document.createElement('div');
-    wrapper.className = 'main-wrapper';
-    document.body.appendChild(wrapper);
+    const wrapper = document.querySelector('.videoData-container');
     array.forEach((data) => {
       const { title, channelTitle, description } = data.snippet;
       const { publishedAt } = data.snippet;
       const { url } = data.snippet.thumbnails.medium;
-      const dataBlock = document.createElement('div');
 
+      const dataBlock = document.createElement('div');
       dataBlock.className = 'youtube-info-wrapper';
       wrapper.appendChild(dataBlock);
 
+      const titleContainer = document.createElement('div');
+      titleContainer.className = 'video-title';
+      dataBlock.appendChild(titleContainer);
       const titleField = document.createElement('p');
       const channelName = document.createElement('p');
       const descriptionField = document.createElement('p');
@@ -30,9 +40,9 @@ export default class AppView {
       titleField.innerText = title;
       channelName.innerText = channelTitle;
       descriptionField.innerText = description;
-      publishTime.innerText = new Date(publishedAt);
+      publishTime.innerText = publishedAt.slice(0, 10);
       dataBlock.appendChild(previewImage);
-      dataBlock.appendChild(titleField);
+      titleContainer.appendChild(titleField);
       dataBlock.appendChild(channelName);
       dataBlock.appendChild(descriptionField);
       dataBlock.appendChild(publishTime);
