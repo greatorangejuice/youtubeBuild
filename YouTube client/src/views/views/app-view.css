@@ -1,7 +1,8 @@
 .videoData-container {
   display: flex;
   margin: 10px;
-  overflow: hidden;
+  overflow-y: hidden;
+  --n: 1;
 }
 
 .youtube-info-wrapper {
@@ -12,7 +13,6 @@
   width: 250px;
   font-size: 12px;
   margin-right: 15px;
-  /* max-height: 80vh; */
   /* background-color: #c48d1875; */
   background-color: #555555;
   border: 1px solid black;
