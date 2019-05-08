@@ -2,7 +2,6 @@
   display: flex;
   margin: 10px;
   overflow-y: hidden;
-  --n: 1;
 }
 
 .youtube-info-wrapper {

@@ -21,5 +21,8 @@ export default class InitialView {
     const dataWrapper = document.createElement('div');
     dataWrapper.className = 'videoData-container';
     appContainer.appendChild(dataWrapper);
+
+    const sliderScriptLink = document.createElement('script');
+    sliderScriptLink.type = 'text/javascript';
   }
 }

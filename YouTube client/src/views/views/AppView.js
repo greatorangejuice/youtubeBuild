@@ -1,4 +1,5 @@
 import './app-view.css';
+import './swiper.css';
 
 export default class AppView {
   // constructor(snippets) {
