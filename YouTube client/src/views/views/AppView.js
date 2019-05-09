@@ -1,15 +1,9 @@
 import './app-view.css';
-import './swiper.css';
+// import './swiper.css';
+// import Swiper from './swiper';
+import Carousel from './gallery-carousel';
 
 export default class AppView {
-  // constructor(snippets) {
-  //   this.snippets = snippets;
-  //   console.log(snippets);
-  // }
-  // static convertToHumanDate(date) {
-
-  // }
-
   deletePreviousData() {
     console.log(this.snippets);
     const wrapper = document.querySelector('videoData-container');
@@ -18,6 +12,16 @@ export default class AppView {
 
   render(array) {
     console.log(this.snippets);
+    const mainContainer = document.querySelector('.main-container');
+    const buttonPrev = document.createElement('button');
+    buttonPrev.innerHTML = '⇦';
+    buttonPrev.className = 'prev';
+    mainContainer.appendChild(buttonPrev);
+
+    const buttonNext = document.createElement('button');
+    buttonNext.innerHTML = '⇨';
+    buttonNext.className = 'next';
+    mainContainer.appendChild(buttonNext);
     const wrapper = document.querySelector('.gallery');
     array.forEach((data) => {
       const { title, channelTitle, description } = data.snippet;
@@ -48,9 +52,13 @@ export default class AppView {
       dataBlock.appendChild(descriptionField);
       dataBlock.appendChild(publishTime);
       // И так со всеми элементами.
+
+
+      // const swiper = new Swiper();
+      // swiper.buildSwiper();
+
+      const carousel = new Carousel();
+      carousel.buildCarousel();
     });
   }
 }
-// Нужно запилить 15 блоков DOM, в каждый запихнуть всю нужную инфу, а уже потом пилить слайдер
-// Осталось придумать, как это правильно мапами обработать.
-// Придёт массив с объектами. А потом буду парсить.

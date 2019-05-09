@@ -3,16 +3,6 @@ export default class GetData {
     this.state = state;
   }
 
-  // Сюда через state приходит URL.
-  // Точнее, мы прокидываем сюда весь объект state, в котором есть заветный url.
-  // Здесь же я запилю метод, который будет тянуть данные из первой data,
-  // чтобы запустить второй запрос для лайков и прочего.
-  // static extractData(data) { // почему я не могу юзать async?
-  //   console.log('ExtractData working here');
-  //   const snippets = data.items.map(snippet => snippet);
-  //   console.log('Snippets: ', snippets);
-  // }
-
   async getAllData() {
     const { APIKEY } = this.state;
     const inputField = document.querySelector('.search-field').value;
@@ -25,6 +15,5 @@ export default class GetData {
     console.log(data);
     console.log(snippets);
     return snippets;
-    // return GetData.extractData(data);
   }
 }

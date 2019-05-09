@@ -1,33 +1,27 @@
-.swiper {
-  color: white;
-}
-
-.arrow {
-  position: absolute;
-  top: 60px;
-  padding: 0;
-  background: #ddd;
-  border-radius: 15px;
-  border: 1px solid gray;
-  font-size: 24px;
-  line-height: 24px;
-  color: #444;
-  display: block;
-}
-
-.arrow:focus {
-  outline: none;
-}
-
-.arrow:hover {
-  background: #ccc;
+.gallery {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  position: relative;
+  /* overflow-x: scroll;
+  overflow-y: hidden; */
+  -webkit-transition: all 0.2s;
+  transition: all 0.2s;
+  -webkit-transform: scale(0.98);
+          transform: scale(0.98);
+  will-change: transform;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
   cursor: pointer;
 }
 
-.prev {
-  left: 7px;
+.gallery.active {
+  background: rgba(255, 255, 255, 0.3);
+  cursor: grabbing;
+  cursor: -webkit-grabbing;
+  -webkit-transform: scale(1);
+          transform: scale(1);
 }
-
-.next {
-  right: 7px;
-}
+/*# sourceMappingURL=swiper.css.map */

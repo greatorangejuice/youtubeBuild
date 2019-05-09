@@ -3,43 +3,33 @@ import './swiper.css';
 export default class Swiper {
   // eslint-disable-next-line class-methods-use-this
   buildSwiper() {
-    const swiper = document.querySelector('.swiper');
-    const gallery = document.querySelector('.gallery');
+    const slider = document.querySelector('.gallery');
+    let isDown = false;
+    let startX;
+    let scrollLeft;
 
-    /* этот код помечает картинки, для удобства разработки */
-    let list = document.querySelectorAll('.youtube-info-wrapper');
-    for (let i = 0; i < list.length; i++) {
-      list[i].style.position = 'relative';
-      let span = document.createElement('span');
-      // обычно лучше использовать CSS-классы,
-      // но этот код - для удобства разработки, так что не будем трогать стили
-      span.style.cssText = 'position:absolute;left:0;top:0';
-      span.innerHTML = i + 1;
-      list[i].appendChild(span);
-    }
-
-    /* конфигурация */
-    let width = 130; // ширина изображения
-    let count = 3; // количество изображений
-
-    let carousel = document.getElementById('carousel');
-    let list = carousel.querySelector('ul');
-    let listElems = carousel.querySelectorAll('li');
-
-    let position = 0; // текущий сдвиг влево
-
-    carousel.querySelector('.prev').onclick = function () {
-      // сдвиг влево
-      // последнее передвижение влево может быть не на 3, а на 2 или 1 элемент
-      position = Math.min(position + width * count, 0)
-      list.style.marginLeft = position + 'px';
-    };
-
-    carousel.querySelector('.next').onclick = function () {
-      // сдвиг вправо
-      // последнее передвижение вправо может быть не на 3, а на 2 или 1 элемент
-      position = Math.max(position - width * count, -width * (listElems.length - count));
-      list.style.marginLeft = position + 'px';
-    };
+    slider.addEventListener('mousedown', (e) => {
+      isDown = true;
+      slider.classList.add('active');
+      startX = e.pageX - slider.offsetLeft;
+      // eslint-disable-next-line prefer-destructuring
+      scrollLeft = slider.scrollLeft;
+    });
+    slider.addEventListener('mouseleave', () => {
+      isDown = false;
+      slider.classList.remove('active');
+    });
+    slider.addEventListener('mouseup', () => {
+      isDown = false;
+      slider.classList.remove('active');
+    });
+    slider.addEventListener('mousemove', (e) => {
+      if (!isDown) return;
+      e.preventDefault();
+      const x = e.pageX - slider.offsetLeft;
+      const walk = (x - startX) * 3; // scroll-fast
+      slider.scrollLeft = scrollLeft - walk;
+      console.log(walk);
+    });
   }
 }

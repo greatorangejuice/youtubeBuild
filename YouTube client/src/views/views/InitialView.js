@@ -22,12 +22,16 @@ export default class InitialView {
     wrapper.appendChild(startButton);
 
     const dataWrapper = document.createElement('div');
-    dataWrapper.className = 'videoData-container swiper';
+    dataWrapper.className = 'main-container';
     appContainer.appendChild(dataWrapper);
+
+    const galleryContainer = document.createElement('div');
+    galleryContainer.className = 'wrapper';
+    dataWrapper.appendChild(galleryContainer);
 
     const swipeContainer = document.createElement('div');
     swipeContainer.className = 'gallery';
-    dataWrapper.appendChild(swipeContainer);
+    galleryContainer.appendChild(swipeContainer);
 
     const sliderScriptLink = document.createElement('script');
     sliderScriptLink.type = 'text/javascript';
