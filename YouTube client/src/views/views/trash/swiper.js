@@ -1,4 +1,4 @@
-import './swiper.css';
+// import './swiper.css';
 
 export default class Swiper {
   // eslint-disable-next-line class-methods-use-this

@@ -1,24 +1,19 @@
-import './carousel.css';
-
 
 export default class Carousel {
   // eslint-disable-next-line class-methods-use-this
   buildCarousel() {
-    /* этот код помечает картинки, для удобства разработки */
     const lis = document.querySelectorAll('.youtube-info-wrapper');
     for (let i = 0; i < lis.length; i += 1) {
       lis[i].style.position = 'relative';
       const span = document.createElement('span');
-      // обычно лучше использовать CSS-классы,
-      // но этот код - для удобства разработки, так что не будем трогать стили
       span.style.cssText = 'position:absolute;left:0;top:0';
       span.innerHTML = i + 1;
       lis[i].appendChild(span);
     }
 
     /* конфигурация */
-    const width = 270; // ширина изображения
-    const count = 4; // количество изображений
+    const width = 300;
+    const count = 4;
 
     const carousel = document.querySelector('.main-container');
     const list = carousel.querySelector('.gallery');
@@ -41,5 +36,37 @@ export default class Carousel {
       position = Math.max(position - width * count, -width * (listElems.length - count));
       list.style.marginLeft = `${position}px`;
     };
+  }
+
+  // eslint-disable-next-line class-methods-use-this
+  buildSwiper() {
+    const slider = document.querySelector('.gallery');
+    let isDown = false;
+    let startX;
+    let scrollLeft;
+
+    slider.addEventListener('mousedown', (e) => {
+      isDown = true;
+      slider.classList.add('active');
+      startX = e.pageX - slider.offsetLeft;
+      // eslint-disable-next-line prefer-destructuring
+      scrollLeft = slider.scrollLeft;
+    });
+    slider.addEventListener('mouseleave', () => {
+      isDown = false;
+      slider.classList.remove('active');
+    });
+    slider.addEventListener('mouseup', () => {
+      isDown = false;
+      slider.classList.remove('active');
+    });
+    slider.addEventListener('mousemove', (e) => {
+      if (!isDown) return;
+      e.preventDefault();
+      const x = e.pageX - slider.offsetLeft;
+      const walk = (x - startX) * 3; // scroll-fast
+      slider.scrollLeft = scrollLeft - walk;
+      console.log(walk);
+    });
   }
 }

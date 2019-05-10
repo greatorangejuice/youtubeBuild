@@ -11,7 +11,7 @@
   width: 130px;
   height: 130px;
 } */
-.gallery {
+/* .gallery {
   display: flex;
 }
 
@@ -47,6 +47,7 @@
 
 .wrapper {
   overflow: hidden;
+  width: 1185px;
 }
 
 .wrapper .gallery {
@@ -56,7 +57,7 @@
   list-style: none;
   transition: margin-left 250ms;
   font-size: 0;
-}
+} */
 
 /* .wrapper .youtube-info-wrapper {
   display: inline-block;

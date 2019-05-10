@@ -1,27 +1,26 @@
 import './app-view.css';
-// import './swiper.css';
-// import Swiper from './swiper';
-import Carousel from './gallery-carousel';
+import Slider from './slider';
+
 
 export default class AppView {
-  deletePreviousData() {
-    console.log(this.snippets);
-    const wrapper = document.querySelector('videoData-container');
-    document.body.removeChild(wrapper);
-  }
+  // deletePreviousData() {
+  //   console.log(this.snippets);
+  //   const wrapper = document.querySelector('videoData-container');
+  //   document.body.removeChild(wrapper);
+  // }
 
   render(array) {
     console.log(this.snippets);
-    const mainContainer = document.querySelector('.main-container');
-    const buttonPrev = document.createElement('button');
-    buttonPrev.innerHTML = '⇦';
-    buttonPrev.className = 'prev';
-    mainContainer.appendChild(buttonPrev);
+    // const mainContainer = document.querySelector('.main-container');
+    // const buttonPrev = document.createElement('button');
+    // buttonPrev.innerHTML = '⇦';
+    // buttonPrev.className = 'prev';
+    // mainContainer.appendChild(buttonPrev);
 
-    const buttonNext = document.createElement('button');
-    buttonNext.innerHTML = '⇨';
-    buttonNext.className = 'next';
-    mainContainer.appendChild(buttonNext);
+    // const buttonNext = document.createElement('button');
+    // buttonNext.innerHTML = '⇨';
+    // buttonNext.className = 'next';
+    // mainContainer.appendChild(buttonNext);
     const wrapper = document.querySelector('.gallery');
     array.forEach((data) => {
       const { title, channelTitle, description } = data.snippet;
@@ -29,7 +28,7 @@ export default class AppView {
       const { url } = data.snippet.thumbnails.medium;
 
       const dataBlock = document.createElement('div');
-      dataBlock.className = 'youtube-info-wrapper';
+      dataBlock.className = 'youtube-item';
       wrapper.appendChild(dataBlock);
 
       const titleContainer = document.createElement('div');
@@ -52,13 +51,8 @@ export default class AppView {
       dataBlock.appendChild(descriptionField);
       dataBlock.appendChild(publishTime);
       // И так со всеми элементами.
-
-
-      // const swiper = new Swiper();
-      // swiper.buildSwiper();
-
-      const carousel = new Carousel();
-      carousel.buildCarousel();
+      const slider = new Slider();
+      slider.buildSlider();
     });
   }
 }
