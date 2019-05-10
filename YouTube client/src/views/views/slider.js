@@ -21,7 +21,6 @@ export default class Slider {
     let isDown = false;
     let startX;
     let scrollLeft;
-
     slider.addEventListener('mousedown', (e) => {
       isDown = true;
       slider.classList.add('active');
@@ -53,13 +52,14 @@ export default class Slider {
     const nextButton = document.querySelector('.next');
     const prevButton = document.querySelector('.prev');
     const gallery = document.querySelector('.gallery');
-
+    // let countNext = 0;
+    // let countPrev = 0;
     nextButton.addEventListener('click', () => {
-      gallery.scrollBy(500, 0);
+      gallery.scrollBy(1148, 0);
     });
 
     prevButton.addEventListener('click', () => {
-      gallery.scrollBy(-500, 0);
+      gallery.scrollBy(-1148, 0);
     });
   }
 }
