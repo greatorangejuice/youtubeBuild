@@ -1,11 +1,14 @@
+* {
+  scroll-behavior: smooth;
+}
+
 .wrapper {
   padding: 0;
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 
 .gallery {
   display: flex;
-  justify-content: center;
   position: relative;
   width: 100%;
   overflow-x: scroll;
@@ -24,8 +27,8 @@
 .gallery.active {
   cursor: grabbing;
   cursor: -webkit-grabbing;
-  -webkit-transform: scale(1.05);
-  transform: scale(1.05)
+  /* -webkit-transform: scale(1.05);
+  transform: scale(1.05) */
 }
 
 .item {

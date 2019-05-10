@@ -11,17 +11,10 @@ export default class AppView {
 
   render(array) {
     console.log(this.snippets);
-    // const mainContainer = document.querySelector('.main-container');
-    // const buttonPrev = document.createElement('button');
-    // buttonPrev.innerHTML = '⇦';
-    // buttonPrev.className = 'prev';
-    // mainContainer.appendChild(buttonPrev);
-
-    // const buttonNext = document.createElement('button');
-    // buttonNext.innerHTML = '⇨';
-    // buttonNext.className = 'next';
-    // mainContainer.appendChild(buttonNext);
     const wrapper = document.querySelector('.gallery');
+    const slider = new Slider();
+    slider.buildSliderButtons();
+    slider.buildSlider();
     array.forEach((data) => {
       const { title, channelTitle, description } = data.snippet;
       const { publishedAt } = data.snippet;
@@ -51,8 +44,6 @@ export default class AppView {
       dataBlock.appendChild(descriptionField);
       dataBlock.appendChild(publishTime);
       // И так со всеми элементами.
-      const slider = new Slider();
-      slider.buildSlider();
     });
   }
 }
