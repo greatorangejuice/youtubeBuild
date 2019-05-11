@@ -14,38 +14,44 @@ export default class AppView {
       const { publishedAt } = data.snippet;
       const { url } = data.snippet.thumbnails.medium;
       const { videoId } = data.id;
-      const dataBlock = document.createElement('div');
-      dataBlock.className = 'youtube-item';
-      wrapper.appendChild(dataBlock);
+
+      const parentBlock = document.createElement('div');
+      parentBlock.className = 'youtube-item';
+      wrapper.appendChild(parentBlock);
 
       const titleContainer = document.createElement('div');
       titleContainer.className = 'video-title';
-      dataBlock.appendChild(titleContainer);
+      parentBlock.appendChild(titleContainer);
+
+      const previewImage = document.createElement('img');
+      previewImage.src = url;
+      parentBlock.appendChild(previewImage);
+
       const titleField = document.createElement('a');
       titleField.href = `https://www.youtube.com/watch?v=${videoId}`;
       titleField.target = '_blank';
-      const channelName = document.createElement('p');
-      const descriptionField = document.createElement('p');
-      const publishTime = document.createElement('p');
-      const previewImage = document.createElement('img');
-
-      previewImage.src = url;
       titleField.innerText = title;
-      channelName.innerText = channelTitle;
-      descriptionField.innerText = description;
-      publishTime.innerText = publishedAt.slice(0, 10);
-      dataBlock.appendChild(previewImage);
       titleContainer.appendChild(titleField);
-      dataBlock.appendChild(channelName);
-      dataBlock.appendChild(descriptionField);
-      dataBlock.appendChild(publishTime);
+
+      const channelName = document.createElement('p');
+      channelName.innerText = channelTitle;
+      parentBlock.appendChild(channelName);
+
+      const descriptionField = document.createElement('p');
+      descriptionField.innerText = description;
+      parentBlock.appendChild(descriptionField);
+
+      const publishTime = document.createElement('p');
+      publishTime.innerText = publishedAt.slice(0, 10);
+      parentBlock.appendChild(publishTime);
 
       const views = document.createElement('p');
       views.className = 'count-views';
-      dataBlock.appendChild(views);
+      parentBlock.appendChild(views);
+
+      // inner array = [ [snippets], [views] ];
       const statistic = array[1];
       AppView.getViews(statistic);
-      // И так со всеми элементами.
     });
   }
 
