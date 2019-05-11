@@ -9,14 +9,10 @@ export default class AppView {
     const slider = new Slider();
     slider.buildSliderButtons();
     slider.buildSlider();
-    array[0].forEach((data, [index]) => {
-      console.log(index);
+    array[0].forEach((data) => {
       const { title, channelTitle, description } = data.snippet;
-      console.log('data: ', data.id.videoId);
       const { publishedAt } = data.snippet;
       const { url } = data.snippet.thumbnails.medium;
-      const { videoId } = data.id;
-      console.log('id: ', videoId);
       const dataBlock = document.createElement('div');
       dataBlock.className = 'youtube-item';
       wrapper.appendChild(dataBlock);
@@ -40,8 +36,22 @@ export default class AppView {
       dataBlock.appendChild(channelName);
       dataBlock.appendChild(descriptionField);
       dataBlock.appendChild(publishTime);
+
+      const views = document.createElement('p');
+      views.className = 'count-views';
+      dataBlock.appendChild(views);
+      const stat = array[1];
+      AppView.getViews(stat);
       // И так со всеми элементами.
     });
+  }
+
+  static getViews(stat) {
+    const views = document.querySelectorAll('.count-views');
+    const test = Array.from(views);
+    for (let i = 0; i < test.length; i += 1) {
+      test[i].innerHTML = stat[i];
+    }
   }
 
   // static unRender() {

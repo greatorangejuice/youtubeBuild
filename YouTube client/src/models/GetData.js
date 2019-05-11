@@ -28,9 +28,12 @@ export default class GetData {
     console.log(statistics);
     const views = statistics.items.map(countView => countView.statistics.viewCount);
     console.log('VIEWS arr: ', views);
+    // Массив есть. Я же могу просто запилить его циклом в объект
 
     const result = [snippets, views];
     console.log('RESULT: ', result);
+    // Пройтись циклом и Object.Assign!
+    // А
     return result;
   }
 
