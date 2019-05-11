@@ -25,6 +25,7 @@ export default class Slider {
       isDown = true;
       slider.classList.add('active');
       startX = e.pageX - slider.offsetLeft;
+      console.log(slider.offsetLeft);
       // eslint-disable-next-line prefer-destructuring
       scrollLeft = slider.scrollLeft;
       // console.log(e);
