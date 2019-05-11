@@ -9,7 +9,8 @@ export default class AppView {
     const slider = new Slider();
     slider.buildSliderButtons();
     slider.buildSlider();
-    array[0].forEach((data) => {
+    array[0].forEach((data, [index]) => {
+      console.log(index);
       const { title, channelTitle, description } = data.snippet;
       console.log('data: ', data.id.videoId);
       const { publishedAt } = data.snippet;
