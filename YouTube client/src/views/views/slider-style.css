@@ -16,8 +16,6 @@
   overflow-x: scroll;
   overflow-y: hidden;
   transition: all 0.2s;
-  /* -webkit-transform: scale(0.98); */
-  /* transform: scale(0.98); */
   will-change: transform;
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -29,8 +27,7 @@
 .gallery.active {
   cursor: grabbing;
   cursor: -webkit-grabbing;
-  /* -webkit-transform: scale(1.05);
-  transform: scale(1.05) */
+  background-color: wheat;
 }
 
 .item {

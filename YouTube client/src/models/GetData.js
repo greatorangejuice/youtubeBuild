@@ -6,7 +6,7 @@ export default class GetData {
   async getAllData() {
     const { APIKEY } = this.state;
     const inputField = document.querySelector('.search-field').value;
-    const url = `https://www.googleapis.com/youtube/v3/search?key=${APIKEY}&type=video&part=snippet&maxResults=2&q=${inputField}`;
+    const url = `https://www.googleapis.com/youtube/v3/search?key=${APIKEY}&type=video&part=snippet&maxResults=8&q=${inputField}`;
 
     const response = await fetch(url);
     const data = await response.json();
