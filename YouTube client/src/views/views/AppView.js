@@ -3,23 +3,19 @@ import Slider from './slider';
 
 
 export default class AppView {
-  // deletePreviousData() {
-  //   console.log(this.snippets);
-  //   const wrapper = document.querySelector('videoData-container');
-  //   document.body.removeChild(wrapper);
-  // }
-
   render(array) {
     console.log(this.snippets);
     const wrapper = document.querySelector('.gallery');
     const slider = new Slider();
     slider.buildSliderButtons();
     slider.buildSlider();
-    array.forEach((data) => {
+    array[0].forEach((data) => {
       const { title, channelTitle, description } = data.snippet;
+      console.log('data: ', data.id.videoId);
       const { publishedAt } = data.snippet;
       const { url } = data.snippet.thumbnails.medium;
-
+      const { videoId } = data.id;
+      console.log('id: ', videoId);
       const dataBlock = document.createElement('div');
       dataBlock.className = 'youtube-item';
       wrapper.appendChild(dataBlock);
@@ -46,4 +42,11 @@ export default class AppView {
       // И так со всеми элементами.
     });
   }
+
+  // static unRender() {
+  //   console.log('unRend me please!!!');
+  //   const parent = document.querySelector('.gallery');
+  //   const childes = document.querySelector('.youtube-item');
+  //   parent.removeChild(childes);
+  // }
 }

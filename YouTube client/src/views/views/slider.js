@@ -46,7 +46,6 @@ export default class Slider {
       const x = e.pageX - slider.offsetLeft;
       const walk = (x - startX) * 3;
       slider.scrollLeft = scrollLeft - walk;
-      console.log(walk);
     });
 
     const nextButton = document.querySelector('.next');
