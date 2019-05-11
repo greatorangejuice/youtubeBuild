@@ -13,6 +13,7 @@ export default class AppView {
       const { title, channelTitle, description } = data.snippet;
       const { publishedAt } = data.snippet;
       const { url } = data.snippet.thumbnails.medium;
+      const { videoId } = data.id;
       const dataBlock = document.createElement('div');
       dataBlock.className = 'youtube-item';
       wrapper.appendChild(dataBlock);
@@ -20,7 +21,9 @@ export default class AppView {
       const titleContainer = document.createElement('div');
       titleContainer.className = 'video-title';
       dataBlock.appendChild(titleContainer);
-      const titleField = document.createElement('p');
+      const titleField = document.createElement('a');
+      titleField.href = `https://www.youtube.com/watch?v=${videoId}`;
+      titleField.target = '_blank';
       const channelName = document.createElement('p');
       const descriptionField = document.createElement('p');
       const publishTime = document.createElement('p');
@@ -40,17 +43,17 @@ export default class AppView {
       const views = document.createElement('p');
       views.className = 'count-views';
       dataBlock.appendChild(views);
-      const stat = array[1];
-      AppView.getViews(stat);
+      const statistic = array[1];
+      AppView.getViews(statistic);
       // И так со всеми элементами.
     });
   }
 
-  static getViews(stat) {
+  static getViews(statistic) {
     const views = document.querySelectorAll('.count-views');
-    const test = Array.from(views);
-    for (let i = 0; i < test.length; i += 1) {
-      test[i].innerHTML = stat[i];
+    const fieldForViews = Array.from(views);
+    for (let i = 0; i < fieldForViews.length; i += 1) {
+      fieldForViews[i].innerHTML = statistic[i];
     }
   }
 
