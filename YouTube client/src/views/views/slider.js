@@ -16,8 +16,10 @@ export default class Slider {
   }
 
   // eslint-disable-next-line class-methods-use-this
-  buildSlider() {
+  async buildSlider() {
     const slider = document.querySelector('.gallery');
+    const youtubeItem = document.querySelector('.youtube-item');
+    const youtubeItemWidth = youtubeItem.offsetWidth;
     let isDown = false;
     let startX;
     let scrollLeft;
@@ -28,10 +30,13 @@ export default class Slider {
       console.log(slider.offsetLeft);
       // eslint-disable-next-line prefer-destructuring
       scrollLeft = slider.scrollLeft;
-      // console.log(e);
-      // console.log('PageX: ', e.pageX);
-      // console.log('Slider offsetLeft: ', slider.offsetLeft);
-      // console.log(slider);
+
+      // console.log('scroll width: ', slider.scrollWidth);
+      // console.log('offsetWidth: ', slider.offsetWidth);
+      // console.log('scrollLeft: ', slider.scrollLeft);
+      if (slider.offsetWidth + slider.scrollLeft >= slider.scrollWidth - youtubeItemWidth) {
+        console.log('Its working!');
+      }
     });
     slider.addEventListener('mouseleave', () => {
       isDown = false;
@@ -47,6 +52,11 @@ export default class Slider {
       const x = e.pageX - slider.offsetLeft;
       const walk = (x - startX) * 3;
       slider.scrollLeft = scrollLeft - walk;
+
+      // console.log('slider.scrollLeft: ', slider.scrollLeft);
+      if (slider.scrollLeft === slider.scrollWidth - 100) {
+        console.log('WORK!');
+      }
     });
 
     slider.addEventListener('touchstart', (e) => {

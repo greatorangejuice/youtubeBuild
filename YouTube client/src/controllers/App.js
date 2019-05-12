@@ -2,6 +2,7 @@ import AppView from '../views/views/AppView';
 // import GetData from '../models/GetData';
 import InitialView from '../views/views/InitialView';
 import GetData from '../models/GetData';
+import Slider from '../views/views/slider';
 // import AppView from '../views/views/AppView';
 
 export default class App {
@@ -16,13 +17,14 @@ export default class App {
     const model = new GetData(this.state);
     const startButton = document.querySelector('.search-button');
     const view = new AppView();
+    const slider = new Slider();
     startButton.addEventListener('click', async () => {
       view.render(await model.getAllData());
+      slider.buildSliderButtons();
+      slider.buildSlider();
     });
 
     // Как избавиться во View от конструктора?
     // Как удалить отрисованный DOM?
-    // По идее нужно перенести создание враппера в InitialView, чтобы он
-    // растягивался в ширину, а не вниз.
   }
 }
