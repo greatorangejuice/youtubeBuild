@@ -1,20 +1,28 @@
 export default class GetData {
-  constructor() {
-    this.APIKEY = 'AIzaSyADcQR-taqJA3LHlG0ta4beH0-U5vswwUg';
+  // constructor() {
+  //   this.APIKEY = 'AIzaSyADcQR-taqJA3LHlG0ta4beH0-U5vswwUg';
+  // }
+  constructor(state) {
+    this.state = state;
+    this.token = null;
   }
 
   async getAllData() {
     console.log(this);
-    // const { APIKEY } = this.APIKEY;
-    const APIKEY = 'AIzaSyADcQR-taqJA3LHlG0ta4beH0-U5vswwUg';
+    const { APIKEY } = this.state;
     const inputField = document.querySelector('.search-field').value;
-    const url = `https://www.googleapis.com/youtube/v3/search?key=${APIKEY}&type=video&part=snippet&maxResults=8&q=${inputField}`;
-
+    let url = '';
+    if (this.token == null) {
+      url = `https://www.googleapis.com/youtube/v3/search?key=${APIKEY}&type=video&part=snippet&maxResults=8&q=${inputField}`;
+    } else {
+      url = `https://www.googleapis.com/youtube/v3/search?key=${APIKEY}&type=video&part=snippet&maxResults=8&q=${inputField}&pageToken=${this.token}`;
+    }
     const response = await fetch(url);
     const data = await response.json();
     console.log(data);
     const snippets = data.items.map(snippet => snippet);
     const { nextPageToken } = snippets;
+    this.token = nextPageToken;
 
     console.log(snippets);
     const videosID = [];

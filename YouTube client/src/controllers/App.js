@@ -11,9 +11,8 @@ export default class App {
   }
 
   async start() {
-    console.log(this.state);
     InitialView.getInitialDom();
-    const model = new GetData();
+    const model = new GetData(this.state);
     const startButton = document.querySelector('.search-button');
     const view = new AppView();
     const slider = new Slider();
@@ -27,6 +26,7 @@ export default class App {
       // slider.observe(await model.getAllData(token));
     });
     // eslint-disable-next-line no-unused-vars
-    slider.addEventListener('meetRightWall', await model.getAllData);
+    slider.addEventListener('meetRightWall', await model.getAllData.bind(model));
+    // Хранить токен в КОНСТРУКТОРЕ!
   }
 }

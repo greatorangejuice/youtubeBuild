@@ -5,13 +5,6 @@ export default class Slider {
     this.eventHandlers = {};
   }
 
-  // eventHandlers = {
-  //   'meetRightWall': [handler1, handler2]
-  // }
-
-  // method() {
-  // }
-
   addEventListener(eventName, handler) {
     if (!this.eventHandlers[eventName]) {
       this.eventHandlers[eventName] = [];
