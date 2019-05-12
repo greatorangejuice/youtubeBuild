@@ -4,11 +4,12 @@ export default class AppView {
   render(array) {
     console.log(this.snippets);
     const wrapper = document.querySelector('.gallery');
-    array[0].forEach((data) => {
+    array.forEach((data) => {
       const { title, channelTitle, description } = data.snippet;
       const { publishedAt } = data.snippet;
       const { url } = data.snippet.thumbnails.medium;
       const { videoId } = data.id;
+      const { views } = data;
 
       const parentBlock = document.createElement('div');
       parentBlock.className = 'youtube-item';
@@ -40,22 +41,11 @@ export default class AppView {
       publishTime.innerText = publishedAt.slice(0, 10);
       parentBlock.appendChild(publishTime);
 
-      const views = document.createElement('p');
-      views.className = 'count-views';
-      parentBlock.appendChild(views);
-
-      // inner array = [ [snippets], [views] ];
-      const statistic = array[1];
-      AppView.getViews(statistic);
+      const viewsField = document.createElement('p');
+      viewsField.className = 'count-views';
+      viewsField.innerText = views;
+      parentBlock.appendChild(viewsField);
     });
-  }
-
-  static getViews(statistic) {
-    const views = document.querySelectorAll('.count-views');
-    const fieldForViews = Array.from(views);
-    for (let i = 0; i < fieldForViews.length; i += 1) {
-      fieldForViews[i].innerHTML = statistic[i];
-    }
   }
 
   // static unRender() {

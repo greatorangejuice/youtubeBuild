@@ -1,9 +1,7 @@
 import AppView from '../views/views/AppView';
-// import GetData from '../models/GetData';
 import InitialView from '../views/views/InitialView';
 import GetData from '../models/GetData';
 import Slider from '../views/views/slider';
-// import AppView from '../views/views/AppView';
 
 export default class App {
   constructor() {
@@ -13,20 +11,22 @@ export default class App {
   }
 
   async start() {
+    console.log(this.state);
     InitialView.getInitialDom();
-    const model = new GetData(this.state);
+    const model = new GetData();
     const startButton = document.querySelector('.search-button');
     const view = new AppView();
     const slider = new Slider();
-    // eslint-disable-next-line no-unused-vars
-    const { data, token } = await model.getAllData();
+    // const { data, token } = await model.getAllData
     startButton.addEventListener('click', async () => {
+    // eslint-disable-next-line no-unused-vars
+      const { data, token } = await model.getAllData(); // Сделать проверку внутри на токен.
       view.render(data);
       slider.buildSliderButtons();
       slider.buildSlider();
+      // slider.observe(await model.getAllData(token));
     });
-
-    // Как избавиться во View от конструктора?
-    // Как удалить отрисованный DOM?
+    // eslint-disable-next-line no-unused-vars
+    slider.addEventListener('meetRightWall', await model.getAllData);
   }
 }

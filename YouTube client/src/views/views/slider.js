@@ -1,6 +1,41 @@
 import './slider-style.css';
 
 export default class Slider {
+  constructor() {
+    this.eventHandlers = {};
+  }
+
+  // eventHandlers = {
+  //   'meetRightWall': [handler1, handler2]
+  // }
+
+  // method() {
+  // }
+
+  addEventListener(eventName, handler) {
+    if (!this.eventHandlers[eventName]) {
+      this.eventHandlers[eventName] = [];
+    }
+    this.eventHandlers[eventName].push(handler);
+  }
+
+  fire(eventName) {
+    if (this.eventHandlers[eventName]) {
+      this.eventHandlers[eventName].forEach((handler) => {
+        handler(); // Token will be here
+      });
+    }
+  }
+
+  observe() {
+    const slider = document.querySelector('.gallery');
+    const clip = document.querySelector('.youtube-item');
+    const clipWidth = clip.offsetWidth;
+    if (slider.offsetWidth + slider.scrollLeft >= slider.scrollWidth - clipWidth) {
+      this.fire('meetRightWall');
+    }
+  }
+
   // eslint-disable-next-line class-methods-use-this
   buildSliderButtons() {
     const mainContainer = document.querySelector('.main-container');
@@ -18,8 +53,6 @@ export default class Slider {
   // eslint-disable-next-line class-methods-use-this
   async buildSlider() {
     const slider = document.querySelector('.gallery');
-    const youtubeItem = document.querySelector('.youtube-item');
-    const youtubeItemWidth = youtubeItem.offsetWidth;
     let isDown = false;
     let startX;
     let scrollLeft;
@@ -30,13 +63,7 @@ export default class Slider {
       console.log(slider.offsetLeft);
       // eslint-disable-next-line prefer-destructuring
       scrollLeft = slider.scrollLeft;
-
-      // console.log('scroll width: ', slider.scrollWidth);
-      // console.log('offsetWidth: ', slider.offsetWidth);
-      // console.log('scrollLeft: ', slider.scrollLeft);
-      if (slider.offsetWidth + slider.scrollLeft >= slider.scrollWidth - youtubeItemWidth) {
-        console.log('Start getNextDataFunction');
-      }
+      this.observe();
     });
     slider.addEventListener('mouseleave', () => {
       isDown = false;

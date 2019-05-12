@@ -1,10 +1,12 @@
 export default class GetData {
-  constructor(state) {
-    this.state = state;
+  constructor() {
+    this.APIKEY = 'AIzaSyADcQR-taqJA3LHlG0ta4beH0-U5vswwUg';
   }
 
   async getAllData() {
-    const { APIKEY } = this.state;
+    console.log(this);
+    // const { APIKEY } = this.APIKEY;
+    const APIKEY = 'AIzaSyADcQR-taqJA3LHlG0ta4beH0-U5vswwUg';
     const inputField = document.querySelector('.search-field').value;
     const url = `https://www.googleapis.com/youtube/v3/search?key=${APIKEY}&type=video&part=snippet&maxResults=8&q=${inputField}`;
 
@@ -29,12 +31,15 @@ export default class GetData {
     const views = statistics.items.map(countView => countView.statistics.viewCount);
     console.log('VIEWS arr: ', views);
     // Массив есть. Я же могу просто запилить его циклом в объект
-
+    for (let i = 0; i < snippets.length; i += 1) {
+      snippets[i].views = views[i];
+    }
+    console.log('NEW DATA: ', snippets);
     const result = [snippets, views];
     console.log('RESULT: ', result);
     // Пройтись циклом и Object.Assign!
     // А
-    return { data: result, token: nextPageToken };
+    return { data: snippets, token: nextPageToken };
   }
 
   // async getNextPage(token) {
