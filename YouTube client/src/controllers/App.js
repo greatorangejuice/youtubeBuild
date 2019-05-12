@@ -18,8 +18,10 @@ export default class App {
     const startButton = document.querySelector('.search-button');
     const view = new AppView();
     const slider = new Slider();
+    // eslint-disable-next-line no-unused-vars
+    const { data, token } = await model.getAllData();
     startButton.addEventListener('click', async () => {
-      view.render(await model.getAllData());
+      view.render(data);
       slider.buildSliderButtons();
       slider.buildSlider();
     });

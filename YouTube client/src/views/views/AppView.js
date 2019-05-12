@@ -1,14 +1,9 @@
 import './app-view.css';
-// import Slider from './slider';
-
 
 export default class AppView {
   render(array) {
     console.log(this.snippets);
     const wrapper = document.querySelector('.gallery');
-    // const slider = new Slider();
-    // slider.buildSliderButtons();
-    // slider.buildSlider();
     array[0].forEach((data) => {
       const { title, channelTitle, description } = data.snippet;
       const { publishedAt } = data.snippet;

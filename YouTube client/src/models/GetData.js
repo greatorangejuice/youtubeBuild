@@ -12,7 +12,7 @@ export default class GetData {
     const data = await response.json();
     console.log(data);
     const snippets = data.items.map(snippet => snippet);
-    // const { nextPageToken } = snippets;//ТОКЕН
+    const { nextPageToken } = snippets;
 
     console.log(snippets);
     const videosID = [];
@@ -34,7 +34,7 @@ export default class GetData {
     console.log('RESULT: ', result);
     // Пройтись циклом и Object.Assign!
     // А
-    return result;
+    return { data: result, token: nextPageToken };
   }
 
   // async getNextPage(token) {

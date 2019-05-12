@@ -35,7 +35,7 @@ export default class Slider {
       // console.log('offsetWidth: ', slider.offsetWidth);
       // console.log('scrollLeft: ', slider.scrollLeft);
       if (slider.offsetWidth + slider.scrollLeft >= slider.scrollWidth - youtubeItemWidth) {
-        console.log('Its working!');
+        console.log('Start getNextDataFunction');
       }
     });
     slider.addEventListener('mouseleave', () => {
@@ -52,11 +52,6 @@ export default class Slider {
       const x = e.pageX - slider.offsetLeft;
       const walk = (x - startX) * 3;
       slider.scrollLeft = scrollLeft - walk;
-
-      // console.log('slider.scrollLeft: ', slider.scrollLeft);
-      if (slider.scrollLeft === slider.scrollWidth - 100) {
-        console.log('WORK!');
-      }
     });
 
     slider.addEventListener('touchstart', (e) => {
