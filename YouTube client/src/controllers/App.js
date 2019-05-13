@@ -18,7 +18,6 @@ export default class App {
     const view = new AppView();
     const slider = new Slider();
     startButton.addEventListener('click', async () => {
-    // eslint-disable-next-line no-unused-vars
       const { data } = await model.getAllData();
       view.render(data);
       slider.buildSliderButtons();

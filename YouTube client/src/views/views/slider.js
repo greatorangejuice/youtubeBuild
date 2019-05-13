@@ -20,11 +20,16 @@ export default class Slider {
     }
   }
 
+  // eslint-disable-next-line class-methods-use-this
   observe() {
     const slider = document.querySelector('.gallery');
-    const clip = document.querySelector('.youtube-item');
-    const clipWidth = clip.offsetWidth;
-    if (slider.offsetWidth + slider.scrollLeft >= slider.scrollWidth - clipWidth) {
+    // const clip = document.querySelector('.youtube-item');
+    // const clipWidth = clip.offsetWidth;
+    // if (slider.offsetWidth + slider.scrollLeft >= slider.scrollWidth - clipWidth) {
+    //   this.fire('meetRightWall');
+    // }
+    if (slider.scrollWidth - slider.scrollLeft < window.innerWidth) {
+      // getVideoData();
       this.fire('meetRightWall');
     }
   }
@@ -53,9 +58,13 @@ export default class Slider {
       isDown = true;
       slider.classList.add('active');
       startX = e.pageX - slider.offsetLeft;
-      console.log(slider.offsetLeft);
+      // console.log(slider.offsetLeft);
       // eslint-disable-next-line prefer-destructuring
       scrollLeft = slider.scrollLeft;
+      // slider.scrollWidth - slider.scrollLeft < window.innerWidth
+      console.log('scrollWidth: ', slider.scrollWidth);
+      console.log('scrollLeft ', slider.scrollLeft);
+      console.log('window.innerWidth ', window.innerWidth);
       this.observe();
     });
     slider.addEventListener('mouseleave', () => {
@@ -72,6 +81,9 @@ export default class Slider {
       const x = e.pageX - slider.offsetLeft;
       const walk = (x - startX) * 3;
       slider.scrollLeft = scrollLeft - walk;
+      console.log('PageX: ', e.pageX);
+      console.log('Slider offsetLeft: ', slider.offsetLeft);
+      console.log(window.innerWidth);
     });
 
     slider.addEventListener('touchstart', (e) => {
@@ -99,6 +111,7 @@ export default class Slider {
 
     nextButton.addEventListener('click', () => {
       gallery.scrollBy(1148, 0);
+      // console.log(object);
     });
 
     prevButton.addEventListener('click', () => {
