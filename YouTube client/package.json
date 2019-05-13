@@ -4,6 +4,9 @@
   "description": "test",
   "main": "/src/index.js",
   "scripts": {
+    "test": "jest",
+    "test-watch": "jest --watch",
+    "coverage": "jest --coverage",
     "dev": "webpack-dev-server --mode development --watch",
     "build": "webpack --mode production",
     "lint": "eslint ./"

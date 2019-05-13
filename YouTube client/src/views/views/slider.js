@@ -61,10 +61,14 @@ export default class Slider {
       // console.log(slider.offsetLeft);
       // eslint-disable-next-line prefer-destructuring
       scrollLeft = slider.scrollLeft;
+      console.log('e.pageX: ', e.pageX);
+      console.log('offsetLeft: ', slider.offsetLeft);
+      console.log('startX: ', startX);
       // slider.scrollWidth - slider.scrollLeft < window.innerWidth
-      console.log('scrollWidth: ', slider.scrollWidth);
-      console.log('scrollLeft ', slider.scrollLeft);
-      console.log('window.innerWidth ', window.innerWidth);
+      // console.log('scrollWidth: ', slider.scrollWidth);
+      // console.log('scrollLeft ', slider.scrollLeft);
+      // console.log('window.innerWidth ', window.innerWidth);
+      // console.log('pageX MOUSE: ', slider.pageX);
       this.observe();
     });
     slider.addEventListener('mouseleave', () => {
@@ -81,15 +85,16 @@ export default class Slider {
       const x = e.pageX - slider.offsetLeft;
       const walk = (x - startX) * 3;
       slider.scrollLeft = scrollLeft - walk;
-      console.log('PageX: ', e.pageX);
-      console.log('Slider offsetLeft: ', slider.offsetLeft);
+      console.log('PageX MOVE: ', e.pageX);
+      console.log('Slider offsetLeft MOVE: ', slider.offsetLeft);
       console.log(window.innerWidth);
     });
 
     slider.addEventListener('touchstart', (e) => {
       isDown = true;
       slider.classList.add('active');
-      console.log(e.changedTouches);
+      console.log(e.changedTouches[0]);
+      console.log('e.pageX TOUCH: ', e.changedTouches[0].pageX);
     });
 
     slider.addEventListener('touchend', () => {
