@@ -4,7 +4,7 @@ export default class GetData {
   // }
   constructor(state) {
     this.state = state;
-    this.token = null;
+    this.testToken = null;
   }
 
   async getAllData() {
@@ -12,17 +12,20 @@ export default class GetData {
     const { APIKEY } = this.state;
     const inputField = document.querySelector('.search-field').value;
     let url = '';
-    if (this.token == null) {
+    if (this.testToken == null) {
       url = `https://www.googleapis.com/youtube/v3/search?key=${APIKEY}&type=video&part=snippet&maxResults=8&q=${inputField}`;
+      console.log('start with first URL');
     } else {
-      url = `https://www.googleapis.com/youtube/v3/search?key=${APIKEY}&type=video&part=snippet&maxResults=8&q=${inputField}&pageToken=${this.token}`;
+      url = `https://www.googleapis.com/youtube/v3/search?key=${APIKEY}&type=video&part=snippet&maxResults=8&q=${inputField}&pageToken=${this.testToken}`;
+      console.log('TEST TOKEN');
     }
     const response = await fetch(url);
     const data = await response.json();
     console.log(data);
     const snippets = data.items.map(snippet => snippet);
-    const { nextPageToken } = snippets;
-    this.token = nextPageToken;
+    const { nextPageToken } = data;
+    console.log('NEXTPAGETOKEN: ', nextPageToken);
+    this.testToken = nextPageToken;
 
     console.log(snippets);
     const videosID = [];
