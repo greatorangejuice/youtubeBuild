@@ -3,6 +3,7 @@ import './app-view.css';
 export default class AppView {
   render(array) {
     console.log(this.snippets);
+    console.log(array);
     const wrapper = document.querySelector('.gallery');
     array.forEach((data) => {
       const { title, channelTitle, description } = data.snippet;
