@@ -15,15 +15,12 @@ export default class GetData {
     }
     const response = await fetch(url);
     const data = await response.json();
-    const snippets = data.items.map(snippet => snippet);
+
+    const snippets = data.items;
     const { nextPageToken } = data;
     this.testToken = nextPageToken;
 
-    const videosID = [];
-    snippets.forEach((item) => {
-      const { videoId } = item.id;
-      videosID.push(videoId);
-    });
+    const videosID = snippets.map(item => item.id.videoId);
     const ID = videosID.join();
     const statisticURL = `https://www.googleapis.com/youtube/v3/videos?key=AIzaSyCTWC75i70moJLzyNh3tt4jzCljZcRkU8Y&id=${ID}&part=snippet,statistics`;
     const secondResponse = await fetch(statisticURL);

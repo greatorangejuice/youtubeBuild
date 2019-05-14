@@ -15,7 +15,7 @@ export default class Slider {
   fire(eventName) {
     if (this.eventHandlers[eventName]) {
       this.eventHandlers[eventName].forEach((handler) => {
-        handler(); // Token will be here
+        handler();
       });
     }
   }
@@ -23,13 +23,7 @@ export default class Slider {
   // eslint-disable-next-line class-methods-use-this
   observe() {
     const slider = document.querySelector('.gallery');
-    // const clip = document.querySelector('.youtube-item');
-    // const clipWidth = clip.offsetWidth;
-    // if (slider.offsetWidth + slider.scrollLeft >= slider.scrollWidth - clipWidth) {
-    //   this.fire('meetRightWall');
-    // }
     if (slider.scrollWidth - slider.scrollLeft < window.innerWidth) {
-      // getVideoData();
       this.fire('meetRightWall');
     }
   }
@@ -54,32 +48,23 @@ export default class Slider {
     let isDown = false;
     let startX;
     let scrollLeft;
-    slider.addEventListener('mousedown', (e) => {
+    const handleDown = (e) => {
+      this.observe();
       isDown = true;
       slider.classList.add('active');
       startX = e.pageX - slider.offsetLeft;
-      // console.log(slider.offsetLeft);
       // eslint-disable-next-line prefer-destructuring
       scrollLeft = slider.scrollLeft;
-      console.log('e.pageX: ', e.pageX);
-      console.log('offsetLeft: ', slider.offsetLeft);
-      console.log('startX: ', startX);
-      // slider.scrollWidth - slider.scrollLeft < window.innerWidth
-      // console.log('scrollWidth: ', slider.scrollWidth);
-      // console.log('scrollLeft ', slider.scrollLeft);
-      // console.log('window.innerWidth ', window.innerWidth);
-      // console.log('pageX MOUSE: ', slider.pageX);
-      this.observe();
-    });
-    slider.addEventListener('mouseleave', () => {
+    };
+    const handleLeave = () => {
       isDown = false;
       slider.classList.remove('active');
-    });
-    slider.addEventListener('mouseup', () => {
+    };
+    const handleUp = () => {
       isDown = false;
       slider.classList.remove('active');
-    });
-    slider.addEventListener('mousemove', (e) => {
+    };
+    const handleMove = (e) => {
       if (!isDown) return;
       e.preventDefault();
       const x = e.pageX - slider.offsetLeft;
@@ -88,39 +73,52 @@ export default class Slider {
       console.log('PageX MOVE: ', e.pageX);
       console.log('Slider offsetLeft MOVE: ', slider.offsetLeft);
       console.log(window.innerWidth);
-    });
+    };
+    slider.addEventListener('mousedown', handleDown);
+    slider.addEventListener('mouseleave', handleLeave);
+    slider.addEventListener('mouseup', handleUp);
+    slider.addEventListener('mousemove', handleMove);
 
-    slider.addEventListener('touchstart', (e) => {
+    const handleTouchStart = (e) => {
+      this.observe();
       isDown = true;
       slider.classList.add('active');
-      console.log(e.changedTouches[0]);
-      console.log('e.pageX TOUCH: ', e.changedTouches[0].pageX);
-    });
-
-    slider.addEventListener('touchend', () => {
-      isDown = false;
-      slider.classList.remove('active');
-    });
-
-    slider.addEventListener('touchmove', (e) => {
+      startX = e.changedTouches[0].pageX - slider.offsetLeft;
+      // eslint-disable-next-line prefer-destructuring
+      scrollLeft = slider.scrollLeft;
+    };
+    const handleTouchMove = (e) => {
       if (!isDown) return;
       e.preventDefault();
-      const x = e.pageX - slider.offsetLeft;
+      const x = e.changedTouches[0].pageX - slider.offsetLeft;
       const walk = (x - startX) * 3;
       slider.scrollLeft = scrollLeft - walk;
-    });
+    };
+    slider.addEventListener('touchstart', handleTouchStart);
+    slider.addEventListener('touchend', handleLeave);
+    slider.addEventListener('touchmove', handleTouchMove);
 
     const nextButton = document.querySelector('.next');
     const prevButton = document.querySelector('.prev');
     const gallery = document.querySelector('.gallery');
 
-    nextButton.addEventListener('click', () => {
-      gallery.scrollBy(1148, 0);
-      // console.log(object);
-    });
-
-    prevButton.addEventListener('click', () => {
-      gallery.scrollBy(-1148, 0);
-    });
+    /*
+    sliderWrapper using below, because it class set the slider width.
+    You can call only slider, if your slider don't have wrapper.
+    */
+    const sliderWrapper = document.querySelector('.wrapper');
+    const handleButtonNext = () => {
+      this.observe();
+      const currentSliderWidth = sliderWrapper.offsetWidth;
+      gallery.scrollBy(currentSliderWidth, 0);
+      console.log(currentSliderWidth);
+    };
+    const handleButtonPrev = () => {
+      const currentSliderWidth = sliderWrapper.offsetWidth;
+      gallery.scrollBy(-currentSliderWidth, 0);
+      console.log(currentSliderWidth);
+    };
+    nextButton.addEventListener('click', handleButtonNext);
+    prevButton.addEventListener('click', handleButtonPrev);
   }
 }

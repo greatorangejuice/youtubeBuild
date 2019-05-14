@@ -24,5 +24,10 @@ module.exports = {
       },
     ],
   },
-  plugins: [new HtmlWebpackPlugin()],
+  plugins: [new HtmlWebpackPlugin({
+    meta: {
+      viewport: 'width=device-width, initial-scale=1',
+    },
+    title: 'YouTube App',
+  })],
 };
