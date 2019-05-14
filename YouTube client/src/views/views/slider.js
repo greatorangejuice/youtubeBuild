@@ -28,18 +28,35 @@ export default class Slider {
     }
   }
 
+  // alignGallery() {
+  //   const slider = document.querySelector('.gallery');
+  //   if
+  // }
+
   // eslint-disable-next-line class-methods-use-this
   buildSliderButtons() {
     const mainContainer = document.querySelector('.main-container');
+
+    const sliderControlBlock = document.createElement('div');
+    sliderControlBlock.className = 'slider-control';
+    mainContainer.appendChild(sliderControlBlock);
+
     const buttonPrev = document.createElement('button');
     buttonPrev.innerHTML = '⇦';
-    buttonPrev.className = 'prev';
-    mainContainer.appendChild(buttonPrev);
+    buttonPrev.className = 'prev-slider-button';
+    sliderControlBlock.appendChild(buttonPrev);
+
+    const pageIdent = document.createElement('span');
+    pageIdent.setAttribute('page', 1);
+    pageIdent.className = 'page';
+    pageIdent.id = 'page';
+    pageIdent.innerText = '1';
+    sliderControlBlock.appendChild(pageIdent);
 
     const buttonNext = document.createElement('button');
     buttonNext.innerHTML = '⇨';
-    buttonNext.className = 'next';
-    mainContainer.appendChild(buttonNext);
+    buttonNext.className = 'next-slider-button';
+    sliderControlBlock.appendChild(buttonNext);
   }
 
   // eslint-disable-next-line class-methods-use-this
@@ -48,6 +65,7 @@ export default class Slider {
     let isDown = false;
     let startX;
     let scrollLeft;
+    let walkTest;
     const handleDown = (e) => {
       this.observe();
       isDown = true;
@@ -55,24 +73,41 @@ export default class Slider {
       startX = e.pageX - slider.offsetLeft;
       // eslint-disable-next-line prefer-destructuring
       scrollLeft = slider.scrollLeft;
+      console.log('scrollLeft ', slider.scrollLeft);
     };
     const handleLeave = () => {
       isDown = false;
       slider.classList.remove('active');
+      // if (slider.scrollLeft)
+      // if (!walkTest % 273 === 0) {
+      //   console.log('align');
+      //   slider.scrollLeft -= 100;
+      // }
+      // walkTest = 0;
     };
     const handleUp = () => {
       isDown = false;
       slider.classList.remove('active');
     };
     const handleMove = (e) => {
+      // let alignWalk;
       if (!isDown) return;
       e.preventDefault();
       const x = e.pageX - slider.offsetLeft;
-      const walk = (x - startX) * 3;
-      slider.scrollLeft = scrollLeft - walk;
-      console.log('PageX MOVE: ', e.pageX);
-      console.log('Slider offsetLeft MOVE: ', slider.offsetLeft);
-      console.log(window.innerWidth);
+      walkTest = (x - startX) * 3;
+      slider.scrollLeft = scrollLeft - walkTest;
+
+      // if (walkTest % 273 !== 0) {
+      //   alignWalk = 273 - slider.scrollLeft;
+      // }
+      // slider.scrollLeft = alignWalk;
+
+
+      // console.log('PageX MOVE: ', e.pageX);
+      // console.log('Slider offsetLeft MOVE: ', slider.offsetLeft);
+      // console.log(window.innerWidth);
+      console.log('walk', walkTest);
+      console.log('slider.scrollLeft: ', slider.scrollLeft);
     };
     slider.addEventListener('mousedown', handleDown);
     slider.addEventListener('mouseleave', handleLeave);
@@ -86,6 +121,9 @@ export default class Slider {
       startX = e.changedTouches[0].pageX - slider.offsetLeft;
       // eslint-disable-next-line prefer-destructuring
       scrollLeft = slider.scrollLeft;
+      console.log('test ', slider.scrollWidth);
+      console.log(slider.scrollLeft);
+      console.log(window.innerWidth);
     };
     const handleTouchMove = (e) => {
       if (!isDown) return;
@@ -98,8 +136,8 @@ export default class Slider {
     slider.addEventListener('touchend', handleLeave);
     slider.addEventListener('touchmove', handleTouchMove);
 
-    const nextButton = document.querySelector('.next');
-    const prevButton = document.querySelector('.prev');
+    const nextButton = document.querySelector('.next-slider-button');
+    const prevButton = document.querySelector('.prev-slider-button');
     const gallery = document.querySelector('.gallery');
 
     /*
@@ -112,6 +150,8 @@ export default class Slider {
       const currentSliderWidth = sliderWrapper.offsetWidth;
       gallery.scrollBy(currentSliderWidth, 0);
       console.log(currentSliderWidth);
+      console.log(slider.scrollWidth);
+      console.log((slider.scrollLeft));
     };
     const handleButtonPrev = () => {
       const currentSliderWidth = sliderWrapper.offsetWidth;

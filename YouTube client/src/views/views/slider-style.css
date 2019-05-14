@@ -38,13 +38,45 @@
   margin: 2em 1em
 }
 
-@media screen and (max-width: 500px) {
-  .item {
-    min-height: 200px;
-    min-width: 200px
+::-webkit-scrollbar{
+  width:12px;
+}
+
+.page {
+  width: 30px;
+  height: 30px;
+  border-radius: 20px;
+  border: none;
+  background-color: #555555;
+}
+
+.slider-control {
+  display: flex;
+  justify-content: center;
+}
+
+.next-slider-button,
+.prev-slider-button {
+  width: 30px;
+  height: 30px;
+  border-radius: 20px;
+  border: none;
+}
+
+@media screen and (max-width: 1024px) {
+  .wrapper {
+    width: 859px;
   }
 }
 
-::-webkit-scrollbar{
-  width:12px;
+@media screen and (max-width: 425px) {
+  .wrapper {
+    width: 283px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .wrapper{
+    width: 570px;
+  }
 }
