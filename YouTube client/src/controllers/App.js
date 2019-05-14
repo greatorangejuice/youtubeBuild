@@ -16,6 +16,7 @@ export default class App {
     InitialView.getInitialDom();
     const model = new GetData(this.state);
     const startButton = document.querySelector('.search-button');
+    // const inputField = document.querySelector('.search-field').value;
     const view = new AppView();
     const slider = new Slider();
     startButton.addEventListener('click', async () => {

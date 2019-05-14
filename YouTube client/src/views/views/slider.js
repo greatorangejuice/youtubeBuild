@@ -50,7 +50,7 @@ export default class Slider {
     pageIdent.setAttribute('page', 1);
     pageIdent.className = 'page';
     pageIdent.id = 'page';
-    pageIdent.innerText = '1';
+    pageIdent.innerText = '0';
     sliderControlBlock.appendChild(pageIdent);
 
     const buttonNext = document.createElement('button');
@@ -62,10 +62,11 @@ export default class Slider {
   // eslint-disable-next-line class-methods-use-this
   async buildSlider() {
     const slider = document.querySelector('.gallery');
+    const page = document.querySelector('.page');
     let isDown = false;
     let startX;
     let scrollLeft;
-    let walkTest;
+    let walk;
     const handleDown = (e) => {
       this.observe();
       isDown = true;
@@ -79,25 +80,45 @@ export default class Slider {
       isDown = false;
       slider.classList.remove('active');
       // if (slider.scrollLeft)
-      // if (!walkTest % 273 === 0) {
+      // if (!walk % 273 === 0) {
       //   console.log('align');
       //   slider.scrollLeft -= 100;
       // }
-      // walkTest = 0;
+      // walk = 0;
     };
     const handleUp = () => {
       isDown = false;
       slider.classList.remove('active');
+      const sliderWrapper = document.querySelector('.wrapper');
+      // const test = slider.scrollWidth / sliderWrapper.offsetWidth ^ 0;
+      // eslint-disable-next-line no-bitwise
+      const test = (slider.scrollWidth - slider.scrollLeft) / sliderWrapper.offsetWidth ^ 0;
+      console.log('test, ', test);
+      console.log(slider.scrollWidth);
+      console.log(sliderWrapper.offsetWidth);
+      page.innerText = test;
+      /*
+        Как только slider.ScrollLeft станет больше половины длины блока, то есть
+        длины wrapper, то переключаем страницу на плюс один.
+      */
     };
     const handleMove = (e) => {
+      const gallery = document.querySelector('.gallery');
       // let alignWalk;
       if (!isDown) return;
       e.preventDefault();
       const x = e.pageX - slider.offsetLeft;
-      walkTest = (x - startX) * 3;
-      slider.scrollLeft = scrollLeft - walkTest;
+      walk = (x - startX) * 3;
+      // slider.scrollLeft = scrollLeft - walk;
+      if (walk > 0) {
+        // slider.scrollLeft = 1148;
+        gallery.scrollBy(1148, 0);
+      } else if (walk < 0) {
+        gallery.scrollBy(-1148, 0);
+      }
+      console.log(walk);
 
-      // if (walkTest % 273 !== 0) {
+      // if (walk % 273 !== 0) {
       //   alignWalk = 273 - slider.scrollLeft;
       // }
       // slider.scrollLeft = alignWalk;
@@ -106,7 +127,7 @@ export default class Slider {
       // console.log('PageX MOVE: ', e.pageX);
       // console.log('Slider offsetLeft MOVE: ', slider.offsetLeft);
       // console.log(window.innerWidth);
-      console.log('walk', walkTest);
+      console.log('walk', walk);
       console.log('slider.scrollLeft: ', slider.scrollLeft);
     };
     slider.addEventListener('mousedown', handleDown);
@@ -129,7 +150,7 @@ export default class Slider {
       if (!isDown) return;
       e.preventDefault();
       const x = e.changedTouches[0].pageX - slider.offsetLeft;
-      const walk = (x - startX) * 3;
+      walk = (x - startX) * 3;
       slider.scrollLeft = scrollLeft - walk;
     };
     slider.addEventListener('touchstart', handleTouchStart);
@@ -139,7 +160,6 @@ export default class Slider {
     const nextButton = document.querySelector('.next-slider-button');
     const prevButton = document.querySelector('.prev-slider-button');
     const gallery = document.querySelector('.gallery');
-
     /*
     sliderWrapper using below, because it class set the slider width.
     You can call only slider, if your slider don't have wrapper.
@@ -151,7 +171,13 @@ export default class Slider {
       gallery.scrollBy(currentSliderWidth, 0);
       console.log(currentSliderWidth);
       console.log(slider.scrollWidth);
-      console.log((slider.scrollLeft));
+      console.log(slider.scrollLeft);
+      console.log('offsetLeft: ', slider.offsetLeft);
+      if (slider.scrollLeft === 0) {
+        page.setAttribute('page', 1);
+        page.innerText = 1;
+      }
+      // if (slider.scrollLeft)
     };
     const handleButtonPrev = () => {
       const currentSliderWidth = sliderWrapper.offsetWidth;
@@ -162,3 +188,5 @@ export default class Slider {
     prevButton.addEventListener('click', handleButtonPrev);
   }
 }
+
+// Передлать свайпы! За один мах перелистывать сразу по 4 слайда и всё.
