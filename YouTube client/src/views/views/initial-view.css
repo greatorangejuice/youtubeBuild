@@ -20,6 +20,10 @@ body {
   text-transform: uppercase;
 }
 
+.search-button:hover {
+  background-color: red;
+}
+
 .search-field {
   width: 300px;
   border-radius: 4px;
@@ -30,15 +34,24 @@ body {
   margin-right: 1px;
 }
 
-/* body::-webkit-scrollbar {
-  width: 1px;
+.search-field:focus {
+  border: 1px solid red;
 }
 
-body::-webkit-scrollbar-track {
-  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+@media screen and (max-width: 425px) {
+  .search-field-wrapper {
+    margin: 10px 0 20px 0;
+  }
+  .search-field {
+    width: 225px;
+  }
 }
 
-body::-webkit-scrollbar-thumb {
-background-color: darkgrey;
-outline: 1px solid slategrey;
-} */
+@media screen and (max-width: 320px) {
+  .search-field {
+    width: 205px;
+  }
+  .search-button {
+    padding: 10px;
+  }
+}

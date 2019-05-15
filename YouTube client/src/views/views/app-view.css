@@ -21,7 +21,7 @@
   border-radius: 10px;
 }
 
-.youtube-item:(:first-child) {
+.youtube-item:first-child {
   margin-left: 15px;
 }
 

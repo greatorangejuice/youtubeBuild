@@ -28,11 +28,6 @@ export default class Slider {
     }
   }
 
-  // alignGallery() {
-  //   const slider = document.querySelector('.gallery');
-  //   if
-  // }
-
   // eslint-disable-next-line class-methods-use-this
   buildSliderButtons() {
     const mainContainer = document.querySelector('.main-container');
@@ -81,13 +76,6 @@ export default class Slider {
     const handleLeave = () => {
       isDown = false;
       slider.classList.remove('active');
-
-      // if (slider.scrollLeft)
-      // if (!walk % 273 === 0) {
-      //   console.log('align');
-      //   slider.scrollLeft -= 100;
-      // }
-      // walk = 0;
     };
     const handleUp = () => {
       const currentSliderWidth = sliderWrapper.offsetWidth;
@@ -135,8 +123,26 @@ export default class Slider {
       walk = (x - startX) * 3;
       slider.scrollLeft = scrollLeft - walk;
     };
+    const handleLeaveTest = () => {
+      const currentSliderWidth = sliderWrapper.offsetWidth;
+      isDown = false;
+      slider.classList.remove('active');
+      let currentPage = +page.innerHTML;
+      if (walk < 0) {
+        currentPage += 1;
+        page.innerHTML = currentPage;
+      } else if (walk > 0) {
+        currentPage -= 1;
+        if (currentPage < 0) {
+          currentPage = 0;
+        }
+        page.innerHTML = currentPage;
+      }
+      slider.scrollLeft = currentPage * currentSliderWidth;
+      console.log('touchLeave');
+    };
     slider.addEventListener('touchstart', handleTouchStart);
-    slider.addEventListener('touchend', handleLeave);
+    slider.addEventListener('touchend', handleLeaveTest);
     slider.addEventListener('touchmove', handleTouchMove);
 
     const nextButton = document.querySelector('.next-slider-button');
