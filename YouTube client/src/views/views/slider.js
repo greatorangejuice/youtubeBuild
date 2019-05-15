@@ -29,6 +29,17 @@ export default class Slider {
   }
 
   // eslint-disable-next-line class-methods-use-this
+  changePageAfterResize() {
+    const page = document.querySelector('.page');
+    const gallery = document.querySelector('.gallery');
+    const sliderWrapper = document.querySelector('.wrapper');
+    const currentSliderWidth = sliderWrapper.offsetWidth;
+    const currentPage = 0;
+    page.innerHTML = currentPage;
+    gallery.scrollLeft = currentPage * currentSliderWidth;
+  }
+
+  // eslint-disable-next-line class-methods-use-this
   buildSliderButtons() {
     const mainContainer = document.querySelector('.main-container');
 
