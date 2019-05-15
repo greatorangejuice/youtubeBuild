@@ -47,7 +47,7 @@ export default class Slider {
     sliderControlBlock.appendChild(buttonPrev);
 
     const pageIdent = document.createElement('span');
-    pageIdent.setAttribute('page', 1);
+    pageIdent.setAttribute('page', 0);
     pageIdent.className = 'page';
     pageIdent.id = 'page';
     pageIdent.innerText = '0';
@@ -63,6 +63,8 @@ export default class Slider {
   async buildSlider() {
     const slider = document.querySelector('.gallery');
     const page = document.querySelector('.page');
+    const sliderWrapper = document.querySelector('.wrapper');
+    const gallery = document.querySelector('.gallery');
     let isDown = false;
     let startX;
     let scrollLeft;
@@ -79,6 +81,7 @@ export default class Slider {
     const handleLeave = () => {
       isDown = false;
       slider.classList.remove('active');
+
       // if (slider.scrollLeft)
       // if (!walk % 273 === 0) {
       //   console.log('align');
@@ -87,49 +90,31 @@ export default class Slider {
       // walk = 0;
     };
     const handleUp = () => {
+      const currentSliderWidth = sliderWrapper.offsetWidth;
       isDown = false;
       slider.classList.remove('active');
-      const sliderWrapper = document.querySelector('.wrapper');
-      // const test = slider.scrollWidth / sliderWrapper.offsetWidth ^ 0;
-      // eslint-disable-next-line no-bitwise
-      const test = (slider.scrollWidth - slider.scrollLeft) / sliderWrapper.offsetWidth ^ 0;
-      console.log('test, ', test);
-      console.log(slider.scrollWidth);
-      console.log(sliderWrapper.offsetWidth);
-      page.innerText = test;
-      /*
-        Как только slider.ScrollLeft станет больше половины длины блока, то есть
-        длины wrapper, то переключаем страницу на плюс один.
-      */
+      let currentPage = +page.innerHTML;
+      if (walk < 0) {
+        currentPage += 1;
+        page.innerHTML = currentPage;
+      } else if (walk > 0) {
+        currentPage -= 1;
+        if (currentPage < 0) {
+          currentPage = 0;
+        }
+        page.innerHTML = currentPage;
+      }
+      gallery.scrollLeft = currentPage * currentSliderWidth;
     };
+
     const handleMove = (e) => {
-      const gallery = document.querySelector('.gallery');
-      // let alignWalk;
       if (!isDown) return;
       e.preventDefault();
       const x = e.pageX - slider.offsetLeft;
       walk = (x - startX) * 3;
-      // slider.scrollLeft = scrollLeft - walk;
-      if (walk > 0) {
-        // slider.scrollLeft = 1148;
-        gallery.scrollBy(1148, 0);
-      } else if (walk < 0) {
-        gallery.scrollBy(-1148, 0);
-      }
-      console.log(walk);
-
-      // if (walk % 273 !== 0) {
-      //   alignWalk = 273 - slider.scrollLeft;
-      // }
-      // slider.scrollLeft = alignWalk;
-
-
-      // console.log('PageX MOVE: ', e.pageX);
-      // console.log('Slider offsetLeft MOVE: ', slider.offsetLeft);
-      // console.log(window.innerWidth);
-      console.log('walk', walk);
-      console.log('slider.scrollLeft: ', slider.scrollLeft);
+      slider.scrollLeft = scrollLeft - walk;
     };
+
     slider.addEventListener('mousedown', handleDown);
     slider.addEventListener('mouseleave', handleLeave);
     slider.addEventListener('mouseup', handleUp);
@@ -142,9 +127,6 @@ export default class Slider {
       startX = e.changedTouches[0].pageX - slider.offsetLeft;
       // eslint-disable-next-line prefer-destructuring
       scrollLeft = slider.scrollLeft;
-      console.log('test ', slider.scrollWidth);
-      console.log(slider.scrollLeft);
-      console.log(window.innerWidth);
     };
     const handleTouchMove = (e) => {
       if (!isDown) return;
@@ -159,30 +141,30 @@ export default class Slider {
 
     const nextButton = document.querySelector('.next-slider-button');
     const prevButton = document.querySelector('.prev-slider-button');
-    const gallery = document.querySelector('.gallery');
     /*
     sliderWrapper using below, because it class set the slider width.
     You can call only slider, if your slider don't have wrapper.
     */
-    const sliderWrapper = document.querySelector('.wrapper');
     const handleButtonNext = () => {
-      this.observe();
       const currentSliderWidth = sliderWrapper.offsetWidth;
-      gallery.scrollBy(currentSliderWidth, 0);
-      console.log(currentSliderWidth);
-      console.log(slider.scrollWidth);
-      console.log(slider.scrollLeft);
-      console.log('offsetLeft: ', slider.offsetLeft);
-      if (slider.scrollLeft === 0) {
-        page.setAttribute('page', 1);
-        page.innerText = 1;
+      let currentPage = +page.innerHTML;
+      currentPage += 1;
+      if (currentPage < 0) {
+        currentPage = 0;
       }
-      // if (slider.scrollLeft)
+      page.innerHTML = currentPage;
+      gallery.scrollLeft = currentPage * currentSliderWidth;
+      this.observe();
     };
     const handleButtonPrev = () => {
       const currentSliderWidth = sliderWrapper.offsetWidth;
-      gallery.scrollBy(-currentSliderWidth, 0);
-      console.log(currentSliderWidth);
+      let currentPage = +page.innerHTML;
+      currentPage -= 1;
+      if (currentPage < 0) {
+        currentPage = 0;
+      }
+      page.innerHTML = currentPage;
+      gallery.scrollLeft = currentPage * currentSliderWidth;
     };
     nextButton.addEventListener('click', handleButtonNext);
     prevButton.addEventListener('click', handleButtonPrev);
