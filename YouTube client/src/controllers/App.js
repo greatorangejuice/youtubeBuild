@@ -12,14 +12,15 @@ export default class App {
   }
 
   async start() {
-    // let { nextToken } = this.state;
     InitialView.getInitialDom();
     const model = new GetData(this.state);
     const startButton = document.querySelector('.search-button');
     // const inputField = document.querySelector('.search-field').value;
     const view = new AppView();
     const slider = new Slider();
+    // for add one more event, like a key, I need singletone, I think.
     startButton.addEventListener('click', async () => {
+      view.clearPreviousInfo();
       const { data } = await model.getAllData();
       view.render(data);
       slider.buildSliderButtons();
@@ -31,6 +32,5 @@ export default class App {
       view.render(data);
     });
     window.addEventListener('resize', slider.changePageAfterResize);
-    // Поменять return и просто запускать рендер
   }
 }

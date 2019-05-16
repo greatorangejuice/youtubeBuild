@@ -1,6 +1,16 @@
 import './app-view.css';
 
 export default class AppView {
+  // eslint-disable-next-line class-methods-use-this
+  clearPreviousInfo() {
+    // const searchPreviousValue = document.querySelector('.search-field').value;
+    const gallery = document.querySelector('.gallery');
+    // while (gallery.lastChild) {
+    //   gallery.removeChild(gallery.lastChild);
+    // }
+    gallery.innerHTML = '';
+  }
+
   render(array) {
     console.log(this);
     // console.log(array);

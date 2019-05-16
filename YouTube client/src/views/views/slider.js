@@ -3,6 +3,8 @@ import './slider-style.css';
 export default class Slider {
   constructor() {
     this.eventHandlers = {};
+    this.isSliderButtonsBuild = false;
+    this.isSliderFunctionalBuild = false;
   }
 
   addEventListener(eventName, handler) {
@@ -41,6 +43,8 @@ export default class Slider {
 
   // eslint-disable-next-line class-methods-use-this
   buildSliderButtons() {
+    if (this.isSliderButtonsBuild === true) return;
+    this.isSliderButonsBuild = true;
     const mainContainer = document.querySelector('.main-container');
 
     const sliderControlBlock = document.createElement('div');
@@ -67,6 +71,8 @@ export default class Slider {
 
   // eslint-disable-next-line class-methods-use-this
   async buildSlider() {
+    if (this.isSliderFunctionalBuild === true) return;
+    this.isSliderFunctionalBuild = true;
     const slider = document.querySelector('.gallery');
     const page = document.querySelector('.page');
     const sliderWrapper = document.querySelector('.wrapper');
