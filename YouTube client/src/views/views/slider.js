@@ -95,6 +95,7 @@ export default class Slider {
       slider.classList.remove('active');
     };
     const handleUp = () => {
+      gallery.style.scrollBehavior = 'smooth';
       const currentSliderWidth = sliderWrapper.offsetWidth;
       isDown = false;
       slider.classList.remove('active');
