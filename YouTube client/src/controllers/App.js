@@ -6,8 +6,8 @@ import Slider from '../views/views/slider';
 export default class App {
   constructor() {
     this.state = {
-      APIKEY: 'AIzaSyADcQR-taqJA3LHlG0ta4beH0-U5vswwUg',
-      // APIKEY: 'AIzaSyCTWC75i70moJLzyNh3tt4jzCljZcRkU8Y',
+      // APIKEY: 'AIzaSyADcQR-taqJA3LHlG0ta4beH0-U5vswwUg',
+      APIKEY: 'AIzaSyCTWC75i70moJLzyNh3tt4jzCljZcRkU8Y',
     };
   }
 
