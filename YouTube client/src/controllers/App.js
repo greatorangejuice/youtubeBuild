@@ -31,6 +31,5 @@ export default class App {
       const { data } = await model.getAllData();
       view.render(data);
     });
-    // window.addEventListener('resize', slider.changePageAfterResize);
   }
 }

@@ -165,10 +165,7 @@ export default class Slider {
 
     const nextButton = document.querySelector('.next-slider-button');
     const prevButton = document.querySelector('.prev-slider-button');
-    /*
-    sliderWrapper using below, because it class set the slider width.
-    You can call only slider, if your slider don't have wrapper.
-    */
+
     const handleButtonNext = () => {
       const tooltipNext = document.querySelector('.tooltipNext');
       const currentTooltipValue = +tooltipNext.innerHTML;
@@ -235,7 +232,5 @@ export default class Slider {
     nextButton.addEventListener('mouseout', removeNextButtonTooltip);
     prevButton.addEventListener('mouseover', buildPrevButtonTooltip);
     prevButton.addEventListener('mouseout', removePrevButtonTooltip);
-    // nextButton.addEventListener('mouseout', removeNextButtonTooltip);
-    // nextButton.addEventListener('click', removeNextButtonTooltip);
   }
 }
