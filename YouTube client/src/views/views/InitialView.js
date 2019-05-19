@@ -1,5 +1,3 @@
-import './initial-view.css';
-
 export default class InitialView {
   static getInitialDom() {
     const appContainer = document.createElement('div');

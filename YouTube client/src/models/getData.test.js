@@ -1,7 +1,7 @@
 import GetData from './GetData';
 
 describe('GetData.prototype.getAllData', () => {
-  it('Should be return object with array', () => {
+  it('Should be return object', () => {
     expect(GetData.prototype.getAllData).toBeInstanceOf(Object);
   });
 });
