@@ -44,7 +44,7 @@ export default class Slider {
   // eslint-disable-next-line class-methods-use-this
   buildSliderButtons() {
     if (this.isSliderButtonsBuild === true) return;
-    this.isSliderButonsBuild = true;
+    this.isSliderButtonsBuild = true;
     const mainContainer = document.querySelector('.main-container');
 
     const sliderControlBlock = document.createElement('div');
@@ -77,6 +77,7 @@ export default class Slider {
     const page = document.querySelector('.page');
     const sliderWrapper = document.querySelector('.wrapper');
     const gallery = document.querySelector('.gallery');
+    const sliderControlBlock = document.querySelector('.slider-control');
     let isDown = false;
     let startX;
     let scrollLeft;
@@ -88,7 +89,6 @@ export default class Slider {
       startX = e.pageX - slider.offsetLeft;
       // eslint-disable-next-line prefer-destructuring
       scrollLeft = slider.scrollLeft;
-      console.log('scrollLeft ', slider.scrollLeft);
     };
     const handleLeave = () => {
       isDown = false;
@@ -157,7 +157,6 @@ export default class Slider {
         page.innerHTML = currentPage;
       }
       slider.scrollLeft = currentPage * currentSliderWidth;
-      console.log('touchLeave');
     };
     slider.addEventListener('touchstart', handleTouchStart);
     slider.addEventListener('touchend', handleLeaveTest);
@@ -192,7 +191,42 @@ export default class Slider {
     };
     nextButton.addEventListener('click', handleButtonNext);
     prevButton.addEventListener('click', handleButtonPrev);
+
+    const buildNextButtonTooltip = () => {
+      const nextPage = +page.innerHTML;
+      const tooltipNext = document.createElement('div');
+      tooltipNext.className = 'tooltipNext';
+      tooltipNext.innerHTML = nextPage + 1;
+      sliderControlBlock.appendChild(tooltipNext);
+    };
+    const removeNextButtonTooltip = () => {
+      const tooltipNext = document.querySelector('.tooltipNext');
+      sliderControlBlock.removeChild(tooltipNext);
+    };
+
+    const buildPrevButtonTooltip = () => {
+      const prevPage = +page.innerHTML;
+      const tooltipPrev = document.createElement('div');
+      tooltipPrev.className = 'tooltipPrev';
+      if (prevPage === 0) {
+        tooltipPrev.innerHTML = 0;
+        tooltipPrev.style.backgroundColor = '#b10b0b';
+      } else {
+        tooltipPrev.innerHTML = prevPage - 1;
+      }
+      sliderControlBlock.appendChild(tooltipPrev);
+    };
+
+    const removePrevButtonTooltip = () => {
+      const tooltipPrev = document.querySelector('.tooltipPrev');
+      sliderControlBlock.removeChild(tooltipPrev);
+    };
+
+    nextButton.addEventListener('mouseover', buildNextButtonTooltip);
+    nextButton.addEventListener('mouseout', removeNextButtonTooltip);
+    prevButton.addEventListener('mouseover', buildPrevButtonTooltip);
+    prevButton.addEventListener('mouseout', removePrevButtonTooltip);
+    // nextButton.addEventListener('mouseout', removeNextButtonTooltip);
+    // nextButton.addEventListener('click', removeNextButtonTooltip);
   }
 }
-
-// Передлать свайпы! За один мах перелистывать сразу по 4 слайда и всё.
