@@ -6,8 +6,8 @@ import Slider from '../views/views/slider';
 export default class App {
   constructor() {
     this.state = {
-      // APIKEY: 'AIzaSyADcQR-taqJA3LHlG0ta4beH0-U5vswwUg',
-      APIKEY: 'AIzaSyCTWC75i70moJLzyNh3tt4jzCljZcRkU8Y',
+      APIKEY: 'AIzaSyADcQR-taqJA3LHlG0ta4beH0-U5vswwUg',
+      // APIKEY: 'AIzaSyCTWC75i70moJLzyNh3tt4jzCljZcRkU8Y',
     };
   }
 
@@ -15,7 +15,6 @@ export default class App {
     InitialView.getInitialDom();
     const model = new GetData(this.state);
     const startButton = document.querySelector('.search-button');
-    // const inputField = document.querySelector('.search-field').value;
     const view = new AppView();
     const slider = new Slider();
     // for add one more event, like a key, I need singletone, I think.

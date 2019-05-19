@@ -9,9 +9,9 @@ export default class GetData {
     const inputField = document.querySelector('.search-field').value;
     let url = '';
     if (this.token == null) {
-      url = `https://www.googleapis.com/youtube/v3/search?key=${APIKEY}&type=video&part=snippet&maxResults=8&q=${inputField}`;
+      url = `https://www.googleapis.com/youtube/v3/search?key=${APIKEY}&type=video&part=snippet&maxResults=15&q=${inputField}`;
     } else {
-      url = `https://www.googleapis.com/youtube/v3/search?key=${APIKEY}&type=video&part=snippet&maxResults=8&q=${inputField}&pageToken=${this.token}`;
+      url = `https://www.googleapis.com/youtube/v3/search?key=${APIKEY}&type=video&part=snippet&maxResults=15&q=${inputField}&pageToken=${this.token}`;
     }
     const response = await fetch(url);
     const data = await response.json();
@@ -22,7 +22,7 @@ export default class GetData {
 
     const videosID = snippets.map(item => item.id.videoId);
     const ID = videosID.join();
-    const statisticURL = `https://www.googleapis.com/youtube/v3/videos?key=AIzaSyCTWC75i70moJLzyNh3tt4jzCljZcRkU8Y&id=${ID}&part=snippet,statistics`;
+    const statisticURL = `https://www.googleapis.com/youtube/v3/videos?key=${APIKEY}&id=${ID}&part=snippet,statistics`;
     const secondResponse = await fetch(statisticURL);
     const statistics = await secondResponse.json();
     const views = statistics.items.map(countView => countView.statistics.viewCount);
