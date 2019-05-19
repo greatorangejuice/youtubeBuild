@@ -114,6 +114,7 @@ export default class Slider {
     };
 
     const handleMove = (e) => {
+      gallery.style.scrollBehavior = '';
       if (!isDown) return;
       e.preventDefault();
       const x = e.pageX - slider.offsetLeft;

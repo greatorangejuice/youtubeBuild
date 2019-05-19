@@ -5,15 +5,17 @@ export default class AppView {
   clearPreviousInfo() {
     // const searchPreviousValue = document.querySelector('.search-field').value;
     const gallery = document.querySelector('.gallery');
-    // while (gallery.lastChild) {
-    //   gallery.removeChild(gallery.lastChild);
-    // }
     gallery.innerHTML = '';
   }
 
+  // eslint-disable-next-line class-methods-use-this
+  setFirstPage() {
+    const page = document.querySelector('.page');
+    page.innerHTML = 0;
+  }
+
+  // eslint-disable-next-line class-methods-use-this
   render(array) {
-    console.log(this);
-    // console.log(array);
     const wrapper = document.querySelector('.gallery');
     array.forEach((data) => {
       const { title, channelTitle, description } = data.snippet;

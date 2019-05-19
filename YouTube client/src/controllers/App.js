@@ -24,6 +24,7 @@ export default class App {
       view.render(data);
       slider.buildSliderButtons();
       slider.buildSlider();
+      view.setFirstPage();
     });
     // eslint-disable-next-line no-unused-vars
     slider.addEventListener('meetRightWall', async () => {
