@@ -60,11 +60,4 @@ export default class AppView {
       parentBlock.appendChild(viewsField);
     });
   }
-
-  // static unRender() {
-  //   console.log('unRend me please!!!');
-  //   const parent = document.querySelector('.gallery');
-  //   const childes = document.querySelector('.youtube-item');
-  //   parent.removeChild(childes);
-  // }
 }
