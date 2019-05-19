@@ -169,6 +169,9 @@ export default class Slider {
     You can call only slider, if your slider don't have wrapper.
     */
     const handleButtonNext = () => {
+      const tooltipNext = document.querySelector('.tooltipNext');
+      const currentTooltipValue = +tooltipNext.innerHTML;
+      tooltipNext.innerHTML = currentTooltipValue + 1;
       const currentSliderWidth = sliderWrapper.offsetWidth;
       let currentPage = +page.innerHTML;
       currentPage += 1;
@@ -180,6 +183,11 @@ export default class Slider {
       this.observe();
     };
     const handleButtonPrev = () => {
+      const tooltipPrev = document.querySelector('.tooltipPrev');
+      const currentTooltipValue = +tooltipPrev.innerHTML;
+      if (currentTooltipValue !== 0) {
+        tooltipPrev.innerHTML = currentTooltipValue - 1;
+      }
       const currentSliderWidth = sliderWrapper.offsetWidth;
       let currentPage = +page.innerHTML;
       currentPage -= 1;
