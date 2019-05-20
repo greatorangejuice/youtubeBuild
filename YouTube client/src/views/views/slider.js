@@ -117,6 +117,7 @@ export default class Slider {
     slider.addEventListener('mousemove', handleMove);
 
     const handleTouchStart = (e) => {
+      gallery.style.scrollBehavior = 'smooth';
       this.observe();
       isDown = true;
       slider.classList.add('active');
@@ -125,6 +126,7 @@ export default class Slider {
       scrollLeft = slider.scrollLeft;
     };
     const handleTouchMove = (e) => {
+      gallery.style.scrollBehavior = '';
       if (!isDown) return;
       e.preventDefault();
       const x = e.changedTouches[0].pageX - slider.offsetLeft;
@@ -156,6 +158,7 @@ export default class Slider {
     const prevButton = document.querySelector('.prev-slider-button');
 
     const handleButtonNext = () => {
+      gallery.style.scrollBehavior = 'smooth';
       const tooltipNext = document.querySelector('.tooltipNext');
       const currentTooltipValue = +tooltipNext.innerHTML;
       tooltipNext.innerHTML = currentTooltipValue + 1;
@@ -170,6 +173,7 @@ export default class Slider {
       this.observe();
     };
     const handleButtonPrev = () => {
+      gallery.style.scrollBehavior = 'smooth';
       const tooltipPrev = document.querySelector('.tooltipPrev');
       const currentTooltipValue = +tooltipPrev.innerHTML;
       if (currentTooltipValue !== 0) {
